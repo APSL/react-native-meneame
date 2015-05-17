@@ -18,7 +18,7 @@ class mnm extends React.Component {
                 style={styles.container}
                 tintColor={'#d35400'}
                 initialRoute={{
-                    title: 'Mnm',
+                    title: 'En portada',
                     component: MnmPublicadas
             }}/>
         );
