@@ -1,2 +1,3 @@
-# mnm
-mnm client
+# mnm client
+
+A [meneame.net]() client for iOS built with React Native.
