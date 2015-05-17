@@ -12,6 +12,7 @@ var {
 } = React;
 var screen = require('Dimensions').get('window');
 var moment = require('moment');
+var Icon = require('EvilIcons');
 
 var MnmEntrada = require('./MnmEntrada');
 
@@ -58,7 +59,10 @@ class MnmPublicadas extends Component {
                     <View style={styles.infoContainer}>
                         <Text style={styles.meneos}>{rowData.meneos} ↑</Text>
                         <Text style={styles.negatives}>{rowData.negatives} ↓</Text>
-                        <Text style={styles.comments}>{rowData.comments}</Text>
+                        <View style={styles.comments}>
+                            <Text style={styles.commentsText}>{rowData.comments}</Text>
+                            <Icon style={styles.commentsIcon} name='ei-comment' size={20} color='#95a5a6' />
+                        </View>
                         <Text style={styles.pubDate}>Publicada el {rowData.date}</Text>
                     </View>
                     <View style={styles.imgContainer}>
@@ -117,10 +121,16 @@ var styles = StyleSheet.create({
     },
     comments: {
         flex: 1,
+        flexDirection: 'row',
+    },
+    commentsText: {
         color: '#95a5a6',
         fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
+    },
+    commentsIcon: {
+        bottom: 3,
     },
     pubDate: {
         flex: 5,
