@@ -7,10 +7,13 @@ var {
     Image,
     Text,
     ListView,
+    TouchableHighlight,
     Component
 } = React;
 var screen = require('Dimensions').get('window');
 var moment = require('moment');
+
+var MnmEntrada = require('./MnmEntrada');
 
 class MnmPublicadas extends Component {
     constructor(props) {
@@ -38,29 +41,43 @@ class MnmPublicadas extends Component {
         });
     }
 
+    rowPressed(entrada) {
+        this.props.navigator.push({
+            title: 'Artículo',
+            component: MnmEntrada,
+            passProps: {entrada: entrada}
+        });
+    }
+
     renderRow(rowData, sectionID, rowID) {
         return (
-            <View style={styles.rowContainer}>
-                <View style={styles.infoContainer}>
-                    <Text style={styles.meneos}>{rowData.meneos} meneos</Text>
-                    <Text style={styles.negatives}>{rowData.negatives} negativos</Text>
-                    <Text style={styles.pubDate}>Publicada el {rowData.date}</Text>
+            <TouchableHighlight
+                onPress={() => this.rowPressed(rowData)}
+                underlayColor={'#FAFAFA'}>
+                <View style={styles.rowContainer}>
+                    <View style={styles.infoContainer}>
+                        <Text style={styles.meneos}>{rowData.meneos} ↑</Text>
+                        <Text style={styles.negatives}>{rowData.negatives} ↓</Text>
+                        <Text style={styles.comments}>{rowData.comments}</Text>
+                        <Text style={styles.pubDate}>Publicada el {rowData.date}</Text>
+                    </View>
+                    <View style={styles.imgContainer}>
+                        <Image source={{uri: rowData.media}} resizeMode='cover' style={styles.image}/>
+                    </View>
+                    <View style={styles.titleContent}>
+                        <Text style={styles.title}>
+                            {rowData.title}
+                        </Text>
+                    </View>
                 </View>
-                <View style={styles.imgContainer}>
-                    <Image source={{uri: rowData.media}} resizeMode='cover' style={styles.image}/>
-                </View>
-                <View style={styles.titleContent}>
-                    <Text style={styles.title}>
-                        {rowData.title}
-                    </Text>
-                </View>
-            </View>
+            </TouchableHighlight>
         );
     }
 
     render() {
         return (
-            <ListView style={styles.list} dataSource={this.state.dataSource}
+            <ListView style={styles.list}
+                dataSource={this.state.dataSource}
                 renderRow={this.renderRow.bind(this)}/>
         )
     }
@@ -98,9 +115,16 @@ var styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '300',
     },
+    comments: {
+        flex: 1,
+        color: '#95a5a6',
+        fontFamily: 'Helvetica Neue',
+        fontSize: 14,
+        fontWeight: '300',
+    },
     pubDate: {
-        flex: 2,
-        color: '#bdc3c7',
+        flex: 5,
+        color: '#95a5a6',
         fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
@@ -125,11 +149,12 @@ var styles = StyleSheet.create({
     },
     title: {
         flex: 1,
-        color: '#171717',
+        color: '#262626',
         // fontFamily: 'Bodoni 72 Oldstyle',
         // fontFamily: 'Damascus',
         fontFamily: 'Helvetica Neue',
-        fontSize: 20,
+        fontWeight: 'bold',
+        fontSize: 18,
         marginTop: 5,
     },
 });
