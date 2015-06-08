@@ -61,7 +61,7 @@ class MnmPublicadas extends Component {
                         <Text style={styles.negatives}>{rowData.negatives} ↓</Text>
                         <View style={styles.comments}>
                             <Text style={styles.commentsText}>{rowData.comments}</Text>
-                            <Icon style={styles.commentsIcon} name='ei-comment' size={20} color='#95a5a6' />
+                            <Icon style={styles.commentsIcon} name='comment' size={20} color='#95a5a6' />
                         </View>
                         <Text style={styles.pubDate}>Publicada el {rowData.date}</Text>
                     </View>
