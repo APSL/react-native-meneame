@@ -7,22 +7,45 @@ var {
     Image,
     Text,
     SegmentedControlIOS,
+    ListView,
     Component
 } = React;
 var moment = require('moment');
 var ParallaxView = require('react-native-parallax-view');
 
 class MnmEntrada extends Component {
+    constructor(props) {
+        super(props);
+        var dataSource = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1.comment_id !== r2.comment_id
+        });
+        this.state = {
+            dataSource: dataSource.cloneWithRows([])
+        };
+        this._getComments();
+    }
+
+    _getComments() {
+        var entrada = this.props.entrada;
+        fetch('https://morning-headland-2952.herokuapp.com/comments/' + this.props.entrada.id + '/')
+        .then(response => response.json())
+        .then(response => {
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRows(response.comments)
+            });
+        });
+    }
+
+    renderRow(rowData, sectionID, rowID) {
+        return(
+            <View>
+                <Text style={styles.textComment}>{rowData.comment}</Text>
+            </View>
+        );
+    }
+
     render() {
         var entrada = this.props.entrada;
-        // Use header later
-        // header={(
-        //     <View style={styles.header}>
-        //         <Text style={styles.headerTitle}>
-        //             {entrada.title}
-        //         </Text>
-        //     </View>
-        // )}
         return (
             <ParallaxView
                 backgroundSource={{uri: entrada.media}}
@@ -39,6 +62,9 @@ class MnmEntrada extends Component {
                         selectedIndex={0}
                         style={styles.segmented}/>
                     <Text style={styles.story}>{entrada.story}</Text>
+                    <ListView style={styles.list}
+                        dataSource={this.state.dataSource}
+                        renderRow={this.renderRow.bind(this)}/>
                 </View>
             </ParallaxView>
         );
@@ -112,6 +138,9 @@ var styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 20,
         marginRight: 20,
+    },
+    list: {
+        flex: 1,
     },
 });
 
