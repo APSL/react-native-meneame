@@ -7,20 +7,63 @@ var {
     Image,
     Text,
     SegmentedControlIOS,
+    Navigator,
+    TouchableHighlight,
     ListView,
     Component
 } = React;
 var moment = require('moment');
+var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 
-class MnmEntrada extends Component {
+class NavButton extends Component {
+    render() {
+            // <TouchableHighlight
+            //     style={styles.button}
+            //     underlayColor="#B5B5B5"
+            //     onPress={this.props.onPress}>
+            //     <Text style={styles.buttonText}>{this.props.text}</Text>
+            // </TouchableHighlight>
+        return (
+            <Button style={styles.button} onPress={this.props.onPress}>
+                {this.props.text}
+            </Button>
+        );
+    }
+}
+
+class Comments extends Component {
     constructor(props) {
         super(props);
         var dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1.comment_id !== r2.comment_id
         });
         this.state = {
-            dataSource: dataSource.cloneWithRows([])
+            dataSource: dataSource.cloneWithRows(props.comments)
+        };
+    }
+
+    renderRow(rowData, sectionID, rowID) {
+        return (
+            <Text>{rowData.comment}</Text>
+        );
+    }
+
+    render() {
+        return(
+            <ListView style={styles.navcomments}
+                dataSource={this.state.dataSource}
+                renderRow={this.renderRow.bind(this)}
+            />
+        );
+    }
+}
+
+class MnmEntrada extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            comments: []
         };
         this._getComments();
     }
@@ -31,21 +74,12 @@ class MnmEntrada extends Component {
         .then(response => response.json())
         .then(response => {
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(response.comments)
+                comments: response.comments
             });
         });
     }
 
-    renderRow(rowData, sectionID, rowID) {
-        return(
-            <View>
-                <Text style={styles.textComment}>{rowData.comment}</Text>
-            </View>
-        );
-    }
-
-    render() {
-        var entrada = this.props.entrada;
+    renderScene2(entrada, nav) {
         return (
             <ParallaxView
                 backgroundSource={{uri: entrada.media}}
@@ -62,11 +96,39 @@ class MnmEntrada extends Component {
                         selectedIndex={0}
                         style={styles.segmented}/>
                     <Text style={styles.story}>{entrada.story}</Text>
-                    <ListView style={styles.list}
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}/>
+                    <NavButton onPress={() => {
+                        nav.push({
+                            index: 1,
+                            component: Comments,
+                            sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+                            passProps: {comments: this.state.comments}
+                        });
+                    }} text={'Comentarios (' + entrada.comments + ')'}/>
                 </View>
             </ParallaxView>
+        );
+    }
+
+    detailRender(route, nav) {
+        console.log('route', route, nav);
+        switch (route.index) {
+            case 1:
+                return <Comments comments={this.state.comments}/>;
+            default:
+                return this.renderScene2(this.props.entrada, nav);
+        }
+    }
+
+    render() {
+        return (
+            <Navigator style={styles.container}
+                initialRoute={{name: 'Entrada', index: 0}}
+                renderScene={this.detailRender.bind(this)}
+                configureScene={(route) => {
+                    console.log('configureScene', route);
+                    return Navigator.SceneConfigs.FloatFromBottom;
+                }}
+            />
         );
     }
 }
@@ -90,6 +152,10 @@ var styles = StyleSheet.create({
         marginBottom: 5,
     },
     container: {
+        flex: 1,
+        backgroundColor: '#FAFAFA',
+    },
+    navcomments: {
         flex: 1,
         backgroundColor: '#FAFAFA',
     },
@@ -139,8 +205,10 @@ var styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
     },
-    list: {
-        flex: 1,
+    button: {
+        color: '#d35400',
+        marginTop: 20,
+        fontSize: 22,
     },
 });
 
