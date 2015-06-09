@@ -35,6 +35,8 @@ class MnmPublicadas extends Component {
             response.entries.map(function (entry) {
                 var date = new Date(entry.date[0], entry.date[1], entry.date[2], entry.date[3], entry.date[4], entry.date[5]);
                 entry.date = moment().calendar(date);
+                // entry.media = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * 2 + 'x310/smart/' + entry.media.substr(8, entry.media.length);
+                // console.log(entry.media);
             });
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(response.entries)

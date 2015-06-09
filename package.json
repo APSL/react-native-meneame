@@ -8,7 +8,7 @@
   "dependencies": {
     "moment": "^2.10.3",
     "react-native": "^0.4.4",
-    "react-native-blur": "^0.5",
+    "react-native-blur": "^0.5.1",
     "react-native-button": "^1.2.0",
     "react-native-parallax-view": "^1.0.2",
     "react-native-vector-icons": "^0.6"

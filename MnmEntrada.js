@@ -18,12 +18,12 @@ var ParallaxView = require('react-native-parallax-view');
 
 class NavButton extends Component {
     render() {
-            // <TouchableHighlight
-            //     style={styles.button}
-            //     underlayColor="#B5B5B5"
-            //     onPress={this.props.onPress}>
-            //     <Text style={styles.buttonText}>{this.props.text}</Text>
-            // </TouchableHighlight>
+        // <TouchableHighlight
+        //     style={styles.button}
+        //     underlayColor="#B5B5B5"
+        //     onPress={this.props.onPress}>
+        //     <Text style={styles.buttonText}>{this.props.text}</Text>
+        // </TouchableHighlight>
         return (
             <Button style={styles.button} onPress={this.props.onPress}>
                 {this.props.text}
