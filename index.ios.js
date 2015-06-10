@@ -1,3 +1,6 @@
+/*jshint esnext: true*/
+/*global require, module, fetch*/
+
 'use strict';
 
 var React = require('react-native');
@@ -8,10 +11,11 @@ var {
     StyleSheet,
     Text,
     View,
+    Component
 } = React;
 
 
-class mnm extends React.Component {
+class mnm extends Component {
     render() {
         return (
             <React.NavigatorIOS

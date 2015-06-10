@@ -1,8 +1,12 @@
+/*jshint esnext: true*/
+/*global require, module, fetch*/
+
 'use strict';
 
 var React = require('react-native');
 var {
     StyleSheet,
+    PixelRatio,
     View,
     Image,
     Text,
@@ -17,6 +21,7 @@ var moment = require('moment');
 var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 var MnmComments = require('./MnmComments');
+var MnmEntradaInfo = require('./MnmEntradaInfo');
 
 class NavButton extends Component {
     render() {
@@ -41,6 +46,17 @@ class MnmEntrada extends Component {
             var entry = this.props.entrada;
             this.props.entrada.mediaHeader = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * 2 + 'x' + screen.width * 2 + '/smart/' + entry.media.substr(8, entry.media.length);
         }
+        this.state = {
+            value: 'Noticia'
+        };
+    }
+
+    _renderSegmented(entrada) {
+        if (this.state.value === 'Noticia') {
+            return <Text style={styles.story}>{entrada.story}</Text>;
+        } else {
+            return <MnmEntradaInfo entry={entrada}/>;
+        }
     }
 
     renderEntryView(entrada, nav) {
@@ -55,11 +71,12 @@ class MnmEntrada extends Component {
                         <Text style={styles.meneos}>{entrada.meneos} meneos</Text>
                     </View>
                     <SegmentedControlIOS
-                        values={['Detalles', 'Comentarios']}
+                        values={['Noticia', 'Detalles']}
                         tintColor={'#d35400'}
                         selectedIndex={0}
-                        style={styles.segmented}/>
-                    <Text style={styles.story}>{entrada.story}</Text>
+                        style={styles.segmented}
+                        onValueChange={this._switchDetails.bind(this)}/>
+                    {this._renderSegmented(entrada)}
                     <NavButton onPress={() => {
                         nav.push({
                             index: 1,
@@ -71,6 +88,13 @@ class MnmEntrada extends Component {
                 </View>
             </ParallaxView>
         );
+    }
+
+    _switchDetails(value) {
+        console.log(value);
+        this.setState({
+            value: value
+        });
     }
 
     detailRender(route, nav) {
@@ -121,7 +145,7 @@ var styles = StyleSheet.create({
         fontFamily: 'Helvetica Neue',
         fontWeight: '300',
         color: '#262626',
-        fontSize: 16,
+        fontSize: 20,
         marginLeft: 20,
         marginRight: 20,
         marginTop: 20,
@@ -136,12 +160,13 @@ var styles = StyleSheet.create({
         marginTop: 5,
     },
     info: {
-        borderBottomColor: '#ecf0f1',
-        borderBottomWidth: 1,
+        borderBottomColor: '#7f8c8d',
+        borderBottomWidth: 1 / PixelRatio.get(),
         marginLeft: 20,
         marginRight: 20,
         marginTop: 10,
         marginBottom: 10,
+        paddingBottom: 10,
     },
     meneos: {
         fontFamily: 'Helvetica Neue',

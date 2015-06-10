@@ -1,3 +1,6 @@
+/*jshint esnext: true*/
+/*global require, module, fetch*/
+
 'use strict';
 
 var React = require('react-native');
@@ -88,7 +91,7 @@ class MnmPublicadas extends Component {
             <ListView style={styles.list}
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRow.bind(this)}/>
-        )
+        );
     }
 }
 
@@ -158,6 +161,7 @@ var styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
+        borderRadius: 3,
     },
     titleContent: {
         flex: 1,
@@ -168,8 +172,8 @@ var styles = StyleSheet.create({
         // fontFamily: 'Bodoni 72 Oldstyle',
         // fontFamily: 'Damascus',
         fontFamily: 'Helvetica Neue',
-        fontWeight: 'bold',
-        fontSize: 18,
+        fontWeight: '300', //'bold',
+        fontSize: 20,
         marginTop: 5,
     },
 });

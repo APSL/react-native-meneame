@@ -1,3 +1,6 @@
+/*jshint esnext: true*/
+/*global require, module, fetch*/
+
 'use strict';
 
 var React = require('react-native');
