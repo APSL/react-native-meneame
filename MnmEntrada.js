@@ -12,9 +12,11 @@ var {
     ListView,
     Component
 } = React;
+var screen = require('Dimensions').get('window');
 var moment = require('moment');
 var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
+var MnmComments = require('./MnmComments');
 
 class NavButton extends Component {
     render() {
@@ -32,58 +34,20 @@ class NavButton extends Component {
     }
 }
 
-class Comments extends Component {
-    constructor(props) {
-        super(props);
-        var dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1.comment_id !== r2.comment_id
-        });
-        this.state = {
-            dataSource: dataSource.cloneWithRows(props.comments)
-        };
-    }
-
-    renderRow(rowData, sectionID, rowID) {
-        return (
-            <Text>{rowData.comment}</Text>
-        );
-    }
-
-    render() {
-        return(
-            <ListView style={styles.navcomments}
-                dataSource={this.state.dataSource}
-                renderRow={this.renderRow.bind(this)}
-            />
-        );
-    }
-}
-
 class MnmEntrada extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            comments: []
-        };
-        this._getComments();
+        if (this.props.entrada.media) {
+            var entry = this.props.entrada;
+            this.props.entrada.mediaHeader = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * 2 + 'x' + screen.width * 2 + '/smart/' + entry.media.substr(8, entry.media.length);
+        }
     }
 
-    _getComments() {
-        var entrada = this.props.entrada;
-        fetch('https://morning-headland-2952.herokuapp.com/comments/' + this.props.entrada.id + '/')
-        .then(response => response.json())
-        .then(response => {
-            this.setState({
-                comments: response.comments
-            });
-        });
-    }
-
-    renderScene2(entrada, nav) {
+    renderEntryView(entrada, nav) {
         return (
             <ParallaxView
-                backgroundSource={{uri: entrada.media}}
-                windowHeight={100}>
+                backgroundSource={{uri: entrada.mediaHeader}}
+                windowHeight={120}>
                 <View style={styles.container}>
                     <Text style={styles.title}>{entrada.title}</Text>
                     <Text style={styles.from}>{entrada.from}</Text>
@@ -99,9 +63,9 @@ class MnmEntrada extends Component {
                     <NavButton onPress={() => {
                         nav.push({
                             index: 1,
-                            component: Comments,
+                            component: MnmComments,
                             sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
-                            passProps: {comments: this.state.comments}
+                            passProps: {entryId: entrada.id}
                         });
                     }} text={'Comentarios (' + entrada.comments + ')'}/>
                 </View>
@@ -110,12 +74,11 @@ class MnmEntrada extends Component {
     }
 
     detailRender(route, nav) {
-        console.log('route', route, nav);
         switch (route.index) {
             case 1:
-                return <Comments comments={this.state.comments}/>;
+                return <MnmComments entryId={this.props.entrada.id}/>;
             default:
-                return this.renderScene2(this.props.entrada, nav);
+                return this.renderEntryView(this.props.entrada, nav);
         }
     }
 
@@ -125,7 +88,6 @@ class MnmEntrada extends Component {
                 initialRoute={{name: 'Entrada', index: 0}}
                 renderScene={this.detailRender.bind(this)}
                 configureScene={(route) => {
-                    console.log('configureScene', route);
                     return Navigator.SceneConfigs.FloatFromBottom;
                 }}
             />
@@ -152,10 +114,6 @@ var styles = StyleSheet.create({
         marginBottom: 5,
     },
     container: {
-        flex: 1,
-        backgroundColor: '#FAFAFA',
-    },
-    navcomments: {
         flex: 1,
         backgroundColor: '#FAFAFA',
     },

@@ -35,8 +35,9 @@ class MnmPublicadas extends Component {
             response.entries.map(function (entry) {
                 var date = new Date(entry.date[0], entry.date[1], entry.date[2], entry.date[3], entry.date[4], entry.date[5]);
                 entry.date = moment().calendar(date);
-                // entry.media = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * 2 + 'x310/smart/' + entry.media.substr(8, entry.media.length);
-                // console.log(entry.media);
+                if (entry.media) {
+                    entry.mediaPublished = 'http://thumbor.eduherraiz.com/unsafe/' + (screen.width * 2) + 'x310/smart/' + entry.media.substr(8, entry.media.length);
+                }
             });
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(response.entries)
@@ -63,12 +64,14 @@ class MnmPublicadas extends Component {
                         <Text style={styles.negatives}>{rowData.negatives} ↓</Text>
                         <View style={styles.comments}>
                             <Text style={styles.commentsText}>{rowData.comments}</Text>
-                            <Icon style={styles.commentsIcon} name='comment' size={20} color='#95a5a6' />
+                            <Icon style={styles.commentsIcon} name='comment'
+                                size={20} color='#95a5a6'/>
                         </View>
                         <Text style={styles.pubDate}>Publicada el {rowData.date}</Text>
                     </View>
                     <View style={styles.imgContainer}>
-                        <Image source={{uri: rowData.media}} resizeMode='cover' style={styles.image}/>
+                        <Image source={{uri: rowData.mediaPublished}}
+                            resizeMode='cover' style={styles.image}/>
                     </View>
                     <View style={styles.titleContent}>
                         <Text style={styles.title}>
