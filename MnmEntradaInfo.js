@@ -15,7 +15,7 @@ var EvilIcon = require('EvilIcons');
 
 class MnmEntradaInfo extends Component {
     render() {
-        let e = this.props.entry;
+        var e = this.props.entry;
         e.parsedCategories = e.tags.join(', ');
         return (
             <View style={styles.container}>

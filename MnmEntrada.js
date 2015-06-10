@@ -14,6 +14,7 @@ var {
     Navigator,
     TouchableHighlight,
     ListView,
+    LinkingIOS,
     Component
 } = React;
 var screen = require('Dimensions').get('window');
@@ -59,16 +60,22 @@ class MnmEntrada extends Component {
         }
     }
 
+    _titlePressed() {
+        LinkingIOS.openURL(this.props.entrada.original_url);
+    }
+
     renderEntryView(entrada, nav) {
         return (
             <ParallaxView
                 backgroundSource={{uri: entrada.mediaHeader}}
                 windowHeight={120}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>{entrada.title}</Text>
-                    <Text style={styles.from}>{entrada.from}</Text>
                     <View style={styles.info}>
-                        <Text style={styles.meneos}>{entrada.meneos} meneos</Text>
+                        <TouchableHighlight onPress={this._titlePressed.bind(this)}
+                            underlayColor={'#FAFAFA'}>
+                            <Text style={styles.title}>{entrada.title}</Text>
+                        </TouchableHighlight>
+                        <Text style={styles.from}>{entrada.from}</Text>
                     </View>
                     <SegmentedControlIOS
                         values={['Noticia', 'Detalles']}
@@ -91,7 +98,6 @@ class MnmEntrada extends Component {
     }
 
     _switchDetails(value) {
-        console.log(value);
         this.setState({
             value: value
         });
@@ -146,18 +152,15 @@ var styles = StyleSheet.create({
         fontWeight: '300',
         color: '#262626',
         fontSize: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     from: {
         fontFamily: 'Helvetica Neue',
         fontWeight: '300',
         color: '#7f8c8d',
         fontSize: 12,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 5,
+        marginBottom: 5,
     },
     info: {
         borderBottomColor: '#7f8c8d',

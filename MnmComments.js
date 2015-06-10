@@ -11,6 +11,7 @@ var {
     Image,
     Text,
     TouchableHighlight,
+    ActivityIndicatorIOS,
     ListView,
     Component
 } = React;
@@ -24,7 +25,8 @@ class MnmComments extends Component {
             rowHasChanged: (r1, r2) => r1.comment_id !== r2.comment_id
         });
         this.state = {
-            dataSource: dataSource.cloneWithRows([])
+            dataSource: dataSource.cloneWithRows([]),
+            rows: []
         };
         this._getComments();
     }
@@ -48,7 +50,8 @@ class MnmComments extends Component {
                 }
             });
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(sortedComments)
+                dataSource: this.state.dataSource.cloneWithRows(sortedComments),
+                rows: sortedComments
             });
         });
     }
@@ -74,17 +77,32 @@ class MnmComments extends Component {
         );
     }
 
+    _renderList() {
+        if (this.state.rows.length > 0) {
+            return <ListView style={styles.navcomments}
+                        dataSource={this.state.dataSource}
+                        renderRow={this.renderRow.bind(this)}/>;
+        } else {
+            return <ActivityIndicatorIOS
+                        animating={true}
+                        style={styles.centering}
+                        color='#262626'/>;
+        }
+    }
+
     render() {
         return(
-            <ListView style={styles.navcomments}
-                dataSource={this.state.dataSource}
-                renderRow={this.renderRow.bind(this)}
-            />
+            <View style={styles.container}>
+                {this._renderList()}
+            </View>
         );
     }
 }
 
 var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     navcomments: {
         flex: 1,
         backgroundColor: '#FAFAFA',
@@ -111,6 +129,7 @@ var styles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'Helvetica Neue',
         fontSize: 14,
+        color: '#262626',
     },
     icon: {
         bottom: 3,
@@ -149,6 +168,11 @@ var styles = StyleSheet.create({
         fontWeight: '300',
         fontFamily: 'Helvetica Neue',
         fontSize: 14,
+    },
+    centering: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 
