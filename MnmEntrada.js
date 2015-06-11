@@ -46,7 +46,7 @@ class MnmEntrada extends Component {
         super(props);
         if (this.props.entrada.media) {
             var entry = this.props.entrada;
-            this.props.entrada.mediaHeader = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * 2 + 'x' + screen.width * 2 + '/smart/' + entry.media.substr(8, entry.media.length);
+            this.props.entrada.mediaHeader = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * screen.scale + 'x' + screen.height + '/smart/' + entry.media.substr(8, entry.media.length);
         }
         this.state = {
             value: 'Noticia'
@@ -92,7 +92,8 @@ class MnmEntrada extends Component {
                             sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
                             passProps: {entryId: entrada.id}
                         });
-                    }} text={'Comentarios (' + entrada.comments + ')'}/>
+                    }} text={'Comentarios (' + entrada.comments + ')'}
+                    style={styles.button}/>
                 </View>
             </ParallaxView>
         );
@@ -196,6 +197,10 @@ var styles = StyleSheet.create({
         color: '#d35400',
         marginTop: 20,
         fontSize: 22,
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 20,
+        paddingRight: 20,
     },
 });
 

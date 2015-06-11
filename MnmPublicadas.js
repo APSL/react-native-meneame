@@ -7,6 +7,7 @@ var React = require('react-native');
 var {
     StyleSheet,
     View,
+    PixelRatio,
     Image,
     Text,
     ListView,
@@ -128,9 +129,12 @@ var styles = StyleSheet.create({
     rowContainer: {
         flex: 1,
         flexDirection: 'column',
-        marginBottom: 25,
+        paddingBottom: 25,
         marginLeft: 10,
         marginRight: 10,
+        marginTop: 15,
+        borderBottomColor: '#BDC3C7',
+        borderBottomWidth: 1 / PixelRatio.get(),
     },
     infoContainer: {
         flex: 1,
