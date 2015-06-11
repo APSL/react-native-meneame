@@ -23,6 +23,7 @@ var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 var MnmComments = require('./MnmComments');
 var MnmEntradaInfo = require('./MnmEntradaInfo');
+var BlurView = require('react-native-blur').BlurView;
 
 class NavButton extends Component {
     render() {

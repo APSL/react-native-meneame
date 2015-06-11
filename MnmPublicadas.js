@@ -76,8 +76,7 @@ class MnmPublicadas extends Component {
                         <Text style={styles.pubDate}>Publicada el {rowData.date}</Text>
                     </View>
                     <View style={styles.imgContainer}>
-                        <Image source={{uri: rowData.mediaPublished}}
-                            resizeMode='cover' style={styles.image}/>
+                        <Image source={{uri: rowData.mediaPublished}} style={styles.image}/>
                     </View>
                     <View style={styles.titleContent}>
                         <Text style={styles.title}>
@@ -189,6 +188,7 @@ var styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         borderRadius: 3,
+        resizeMode: 'cover',
     },
     titleContent: {
         flex: 1,
