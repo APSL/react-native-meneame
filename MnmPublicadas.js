@@ -11,6 +11,7 @@ var {
     Text,
     ListView,
     TouchableHighlight,
+    ActivityIndicatorIOS,
     Component
 } = React;
 var screen = require('Dimensions').get('window');
@@ -26,7 +27,8 @@ class MnmPublicadas extends Component {
             rowHasChanged: (r1, r2) => r1.id !== r2.id
         });
         this.state = {
-            dataSource: dataSource.cloneWithRows([])
+            dataSource: dataSource.cloneWithRows([]),
+            published: []
         };
         this._getPublicadas();
     }
@@ -43,7 +45,8 @@ class MnmPublicadas extends Component {
                 }
             });
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(response.entries)
+                dataSource: this.state.dataSource.cloneWithRows(response.entries),
+                published: response.entries
             });
         });
     }
@@ -86,17 +89,39 @@ class MnmPublicadas extends Component {
         );
     }
 
+    _renderList() {
+        if (this.state.published.length > 0) {
+            return <ListView style={styles.list}
+                        dataSource={this.state.dataSource}
+                        renderRow={this.renderRow.bind(this)}/>;
+        } else {
+            return <ActivityIndicatorIOS
+                        animating={true}
+                        style={styles.centering}
+                        color='#262626'/>;
+        }
+    }
+
     render() {
         return (
-            <ListView style={styles.list}
-                dataSource={this.state.dataSource}
-                renderRow={this.renderRow.bind(this)}/>
+            <View style={styles.container}>
+                {this._renderList()}
+            </View>
         );
     }
 }
 
 var styles = StyleSheet.create({
+    centering: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    container: {
+        flex: 1,
+    },
     list: {
+        flex: 1,
         backgroundColor: '#FAFAFA',
     },
     rowContainer: {
