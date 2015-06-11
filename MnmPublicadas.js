@@ -98,7 +98,8 @@ class MnmPublicadas extends Component {
             return <ActivityIndicatorIOS
                         animating={true}
                         style={styles.centering}
-                        color='#262626'/>;
+                        color='#262626'
+                        size='large'/>;
         }
     }
 
@@ -119,6 +120,7 @@ var styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        backgroundColor: '#FAFAFA',
     },
     list: {
         flex: 1,
