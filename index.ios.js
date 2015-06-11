@@ -14,7 +14,6 @@ var {
     Component
 } = React;
 
-
 class mnm extends Component {
     render() {
         return (
