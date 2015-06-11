@@ -27,12 +27,6 @@ var BlurView = require('react-native-blur').BlurView;
 
 class NavButton extends Component {
     render() {
-        // <TouchableHighlight
-        //     style={styles.button}
-        //     underlayColor="#B5B5B5"
-        //     onPress={this.props.onPress}>
-        //     <Text style={styles.buttonText}>{this.props.text}</Text>
-        // </TouchableHighlight>
         return (
             <Button style={styles.button} onPress={this.props.onPress}>
                 {this.props.text}
