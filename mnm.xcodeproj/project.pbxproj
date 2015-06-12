@@ -251,6 +251,8 @@
 		13B07FAE1A68108700A75B9A /* mnm */ = {
 			isa = PBXGroup;
 			children = (
+				389DC79E1B29DC2B00285E46 /* RNBlur */,
+				389DC79F1B29DC2B00285E46 /* RNVibrancy */,
 				38EDDA971B286FC300B69EF6 /* Ionicons.ttf */,
 				383670F41B093791003F8AF3 /* EvilIcons.ttf */,
 				38E6AA941B29C72100470D88 /* Images.xcassets */,
@@ -317,8 +319,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				389DC79E1B29DC2B00285E46 /* RNBlur */,
-				389DC79F1B29DC2B00285E46 /* RNVibrancy */,
 				13B07FAE1A68108700A75B9A /* mnm */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* mnmTests */,

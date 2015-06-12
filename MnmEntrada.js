@@ -23,7 +23,7 @@ var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 var MnmComments = require('./MnmComments');
 var MnmEntradaInfo = require('./MnmEntradaInfo');
-var BlurView = require('react-native-blur').BlurView;
+var MnmWebviewEntry = require('./MnmWebviewEntry');
 
 class NavButton extends Component {
     render() {
@@ -56,7 +56,12 @@ class MnmEntrada extends Component {
     }
 
     _titlePressed() {
-        LinkingIOS.openURL(this.props.entrada.original_url);
+        // LinkingIOS.openURL(this.props.entrada.original_url);
+        this.props.navigator.push({
+            title: this.props.entrada.title,
+            component: MnmWebviewEntry,
+            passProps: {url: this.props.entrada.original_url}
+        });
     }
 
     renderEntryView(entrada, nav) {
