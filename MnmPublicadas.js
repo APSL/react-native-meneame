@@ -38,9 +38,10 @@ class MnmPublicadas extends Component {
         fetch('https://morning-headland-2952.herokuapp.com')
         .then(response => response.json())
         .then(response => {
+            var localMoment = moment();
+            localMoment.locale('es');
             response.entries.map(function (entry) {
-                var date = new Date(entry.date[0], entry.date[1], entry.date[2], entry.date[3], entry.date[4], entry.date[5]);
-                entry.date = moment().calendar(date);
+                entry.date = localMoment(entry.date).fromNow();
                 if (entry.media) {
                     entry.mediaPublished = 'http://thumbor.eduherraiz.com/unsafe/' + (screen.width * 2) + 'x310/smart/' + entry.media.substr(8, entry.media.length);
                 }
@@ -200,10 +201,8 @@ var styles = StyleSheet.create({
     title: {
         flex: 1,
         color: '#262626',
-        // fontFamily: 'Bodoni 72 Oldstyle',
-        // fontFamily: 'Damascus',
         fontFamily: 'Helvetica Neue',
-        fontWeight: '300', //'bold',
+        fontWeight: '300',
         fontSize: 20,
         marginTop: 5,
     },
