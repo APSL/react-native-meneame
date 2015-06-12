@@ -24,7 +24,6 @@ var MnmEntrada = require('./MnmEntrada');
 class MnmPublicadas extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.section);
         var dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1.id !== r2.id
         });
