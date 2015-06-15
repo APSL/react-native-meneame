@@ -21,6 +21,18 @@ var Icon = require('EvilIcons');
 
 var MnmEntrada = require('./MnmEntrada');
 
+class MnmEntryDate extends Component {
+    render() {
+        var dateText = 'Publicada';
+        if (this.props.section === 'Nuevas') {
+            dateText = 'Enviada';
+        }
+        return (
+            <Text style={styles.pubDate}>{dateText} {this.props.date}</Text>
+        );
+    }
+}
+
 class MnmPublicadas extends Component {
     constructor(props) {
         super(props);
@@ -34,34 +46,89 @@ class MnmPublicadas extends Component {
         this._getPublicadas();
     }
 
+    calculateStarredPoints(entry, now: Date) {
+        // Taken from: https://github.com/gallir/Meneame/blob/96ea1d7d3ca0fdbce3243b75b4d4bc92806dfd5f/www/libs/html1.php
+        return (entry.meneos - entry.negatives * 2) * (1 - (now.getTime() - new Date(entry.date).getTime()) * 0.8 / 129600);
+    }
+
     _getPublicadas() {
-        fetch('https://morning-headland-2952.herokuapp.com')
+        var url = 'https://morning-headland-2952.herokuapp.com';
+        if (this.props.section === 'Nuevas') {
+            url = url + '/queued/';
+        }
+        var self = this;
+        fetch(url)
         .then(response => response.json())
         .then(response => {
-            var localMoment = moment();
-            localMoment.locale('es');
-            response.entries.map(function (entry) {
-                entry.date = localMoment(entry.date).fromNow();
+            // var localMoment = moment();
+            // localMoment.locale('es');
+            var nowDate = new Date();
+            var entries = response.entries.map((entry) => {
+                entry.dateFromNow = moment(entry.date).fromNow();
+                entry.meneos = parseInt(entry.meneos);
+                entry.clicks = parseInt(entry.clicks);
+                entry.negatives = parseInt(entry.negatives);
+                entry.karma = parseInt(entry.karma);
                 if (entry.media) {
                     entry.mediaPublished = 'http://thumbor.eduherraiz.com/unsafe/' + (screen.width * 2) + 'x310/smart/' + entry.media.substr(8, entry.media.length);
                 }
+                entry.starredPoints = self.calculateStarredPoints(entry, nowDate);
+                return entry;
+            });
+            var section = this.props.section;
+            entries.sort((p1, p2) => {
+                if (section === 'Populares') {
+                    if (p1.meneos > p2.meneos) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                } else if (section === 'Más visitadas') {
+                    if (p1.clicks > p2.clicks) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                } else if (section === 'Destacadas') {
+                    if (p1.starredPoints > p2.starredPoints) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                } else {
+                    if (new Date(p1.date).getTime() > new Date(p2.date).getTime()) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                }
             });
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(response.entries),
+                dataSource: this.state.dataSource.cloneWithRows(entries),
                 published: response.entries
             });
         });
     }
 
-    rowPressed(entrada) {
+    rowPressed(entry) {
         this.props.navigator.push({
             title: 'Artículo',
             component: MnmEntrada,
-            passProps: {entrada: entrada}
+            passProps: {entrada: entry}
         });
     }
 
-    renderRow(rowData, sectionID, rowID) {
+    renderImage(entry) {
+        if (entry.mediaPublished) {
+            return (
+                <View style={styles.imgContainer}>
+                    <Image source={{uri: entry.mediaPublished}} style={styles.image}/>
+                </View>
+            );
+        }
+    }
+
+    renderRow(rowData) {
         return (
             <TouchableHighlight
                 onPress={() => this.rowPressed(rowData)}
@@ -75,11 +142,10 @@ class MnmPublicadas extends Component {
                             <Icon style={styles.commentsIcon} name='comment'
                                 size={20} color='#95a5a6'/>
                         </View>
-                        <Text style={styles.pubDate}>Publicada el {rowData.date}</Text>
+                        <MnmEntryDate section={this.props.section}
+                            date={rowData.dateFromNow}/>
                     </View>
-                    <View style={styles.imgContainer}>
-                        <Image source={{uri: rowData.mediaPublished}} style={styles.image}/>
-                    </View>
+                    {this.renderImage(rowData)}
                     <View style={styles.titleContent}>
                         <Text style={styles.title}>
                             {rowData.title}
@@ -145,11 +211,11 @@ var styles = StyleSheet.create({
         marginBottom: 10,
     },
     meneos: {
-        flex: 1,
         color: '#d35400',
         fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
+        marginRight: 10,
     },
     negatives: {
         flex: 1,
@@ -194,6 +260,7 @@ var styles = StyleSheet.create({
         right: 0,
         borderRadius: 3,
         resizeMode: 'cover',
+        backgroundColor: '#222',
     },
     titleContent: {
         flex: 1,
