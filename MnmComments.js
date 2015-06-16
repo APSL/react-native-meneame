@@ -39,7 +39,7 @@ class MnmComments extends Component {
             response.comments.forEach((comment) => {
                 comment.order = parseInt(comment.order);
                 comment.date = moment(comment.date);
-                comment.from_now = comment.date.fromNow();
+                comment.fromNow = comment.date.fromNow();
                 comments.push(comment);
             });
             var sortedComments = comments.sort((c1, c2) => {
@@ -56,7 +56,7 @@ class MnmComments extends Component {
         });
     }
 
-    renderRow(rowData, sectionID, rowID) {
+    renderRow(rowData) {
         return (
             <View style={styles.cellContainer}>
                 <View style={styles.infoContainer}>
@@ -67,7 +67,7 @@ class MnmComments extends Component {
                     <Icon style={styles.iconKarma} name='heart' size={20}
                         color='#95a5a6'/>
                     <Text style={styles.karma}>{rowData.karma}</Text>
-                    <Text style={styles.date}>{rowData.from_now}</Text>
+                    <Text style={styles.date}>{rowData.fromNow}</Text>
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.commentNumber}>#{rowData.order}</Text>
@@ -91,7 +91,7 @@ class MnmComments extends Component {
     }
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
                 {this._renderList()}
             </View>

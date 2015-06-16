@@ -4,8 +4,6 @@
 'use strict';
 
 var React = require('react-native');
-var MnmPublicadas = require('./MnmPublicadas');
-
 var {
     AppRegistry,
     StyleSheet,
@@ -16,7 +14,10 @@ var {
     Component
 } = React;
 
+require('moment/locale/es');
 var IonIcon = require('Ionicons');
+
+var MnmPublicadas = require('./MnmPublicadas');
 
 class mnm extends Component {
     constructor(props) {

@@ -3,5 +3,10 @@
     "plugins": ["react"],
     "ecmaFeatures": {
         "jsx": true
+    },
+    "rules": {
+        "quotes": [1, "single"],
+        "no-underscore-dangle": [0],
+        "comma-dangle": [0]
     }
 }

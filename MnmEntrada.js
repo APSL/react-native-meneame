@@ -18,7 +18,6 @@ var {
     Component
 } = React;
 var screen = require('Dimensions').get('window');
-var moment = require('moment');
 var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 var MnmComments = require('./MnmComments');
