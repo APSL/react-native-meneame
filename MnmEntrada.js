@@ -37,9 +37,9 @@ class NavButton extends Component {
 class MnmEntrada extends Component {
     constructor(props) {
         super(props);
-        if (this.props.entrada.media) {
+        if (this.props.entrada.thumb) {
             var entry = this.props.entrada;
-            this.props.entrada.mediaHeader = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * screen.scale + 'x' + screen.height + '/smart/' + entry.media.substr(8, entry.media.length);
+            this.props.entrada.mediaHeader = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * screen.scale + 'x' + screen.height + '/smart/' + entry.thumb.substr(8, entry.thumb.length);
         }
         this.state = {
             value: 'Noticia'
@@ -48,7 +48,7 @@ class MnmEntrada extends Component {
 
     _renderSegmented(entrada) {
         if (this.state.value === 'Noticia') {
-            return <Text style={styles.story}>{entrada.story}</Text>;
+            return <Text style={styles.story}>{entrada.content}</Text>;
         } else {
             return <MnmEntradaInfo entry={entrada}/>;
         }
@@ -59,7 +59,7 @@ class MnmEntrada extends Component {
         this.props.navigator.push({
             title: this.props.entrada.title,
             component: MnmWebviewEntry,
-            passProps: {url: this.props.entrada.original_url}
+            passProps: {url: this.props.entrada.go}
         });
     }
 

@@ -16,14 +16,13 @@ var EvilIcon = require('EvilIcons');
 class MnmEntradaInfo extends Component {
     render() {
         var e = this.props.entry;
-        e.parsedCategories = e.tags.join(', ');
         return (
             <View style={styles.container}>
                 <View style={styles.leftContainer}>
                     <View style={styles.dataContainer}>
                         <IonIcon style={styles.upArrow} name='ios-arrow-thin-up'
                             size={30} color='#d35400'/>
-                        <Text style={styles.meneos}>{e.meneos} meneos</Text>
+                        <Text style={styles.meneos}>{e.votes} meneos</Text>
                     </View>
                     <View style={styles.dataContainer}>
                         <IonIcon style={styles.downArrow} name='ios-arrow-thin-down'
@@ -43,13 +42,13 @@ class MnmEntradaInfo extends Component {
                     <View style={styles.dataContainer}>
                         <EvilIcon style={styles.tag} name='tag'
                             size={30} color='#95a5a6' />
-                        <Text style={styles.categories}>{e.parsedCategories}</Text>
+                        <Text style={styles.categories}>{e.tags}</Text>
                     </View>
                 </View>
                 <View style={styles.rightContainer}>
                     <EvilIcon style={styles.userIcon} name='user'
                         size={50} color='#95a5a6' />
-                    <Text style={styles.username}>{e.username}</Text>
+                    <Text style={styles.username}>{e.user}</Text>
                 </View>
             </View>
         );

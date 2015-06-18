@@ -50,64 +50,34 @@ class MnmPublicadas extends Component {
 
     calculateStarredPoints(entry, now: Date) {
         // Taken from: https://github.com/gallir/Meneame/blob/96ea1d7d3ca0fdbce3243b75b4d4bc92806dfd5f/www/libs/html1.php
-        return (entry.meneos - entry.negatives * 2) * (1 - (now.getTime() - new Date(entry.date).getTime()) * 0.8 / 129600);
+        return (entry.votes - entry.negatives * 2) * (1 - (now.getTime() - new Date(entry.date).getTime()) * 0.8 / 129600);
     }
 
     _getPublicadas() {
-        var url = 'https://morning-headland-2952.herokuapp.com';
+        // 'https://morning-headland-2952.herokuapp.com';
+        var url = 'https://www.meneame.net/api/list';
         if (this.props.section === 'Nuevas') {
-            url = url + '/queued/';
+            url = url + '/?status=queued';
+        } else if (this.props.section === 'Destacadas') {
+            url = url + '/?active';
+        } else if (this.props.section === 'Populares') {
+            url = url + '/?popular';
+        } else if (this.props.section === 'Más visitadas') {
+            url = url + '/?top_visited';
         }
-        var self = this;
         fetch(url)
         .then(response => response.json())
         .then(response => {
-            // var localMoment = moment();
-            // localMoment.locale('es');
-            var nowDate = new Date();
-            var entries = response.entries.map((entry) => {
-                entry.dateFromNow = moment(entry.date).fromNow();
-                entry.meneos = parseInt(entry.meneos);
-                entry.clicks = parseInt(entry.clicks);
-                entry.negatives = parseInt(entry.negatives);
-                entry.karma = parseInt(entry.karma);
-                if (entry.media) {
-                    entry.mediaPublished = 'http://thumbor.eduherraiz.com/unsafe/' + (screen.width * 2) + 'x310/smart/' + entry.media.substr(8, entry.media.length);
+            var entries = response.objects.map((entry) => {
+                entry.dateFromNow = moment.unix(entry.date).fromNow();
+                if (entry.thumb) {
+                    entry.mediaPublished = 'http://thumbor.eduherraiz.com/unsafe/' + (screen.width * 2) + 'x310/smart/' + entry.thumb.substr(8, entry.thumb.length);
                 }
-                entry.starredPoints = self.calculateStarredPoints(entry, nowDate);
                 return entry;
-            });
-            var section = this.props.section;
-            entries.sort((p1, p2) => {
-                if (section === 'Populares') {
-                    if (p1.meneos > p2.meneos) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                } else if (section === 'Más visitadas') {
-                    if (p1.clicks > p2.clicks) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                } else if (section === 'Destacadas') {
-                    if (p1.starredPoints > p2.starredPoints) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
-                } else {
-                    if (new Date(p1.date).getTime() > new Date(p2.date).getTime()) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                }
             });
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(entries),
-                published: response.entries
+                published: entries
             });
         });
     }
@@ -137,7 +107,7 @@ class MnmPublicadas extends Component {
                 underlayColor={'#FAFAFA'}>
                 <View style={styles.rowContainer}>
                     <View style={styles.infoContainer}>
-                        <Text style={styles.meneos}>{rowData.meneos} ↑</Text>
+                        <Text style={styles.meneos}>{rowData.votes} ↑</Text>
                         <Text style={styles.negatives}>{rowData.negatives} ↓</Text>
                         <View style={styles.comments}>
                             <Text style={styles.commentsText}>{rowData.comments}</Text>
