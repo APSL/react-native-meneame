@@ -14,12 +14,13 @@ var {
     Navigator,
     TouchableHighlight,
     ListView,
-    LinkingIOS,
     Component
 } = React;
 var screen = require('Dimensions').get('window');
 var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
+var ThumborURLBuilder = require('thumbor-url-builder');
+
 var MnmComments = require('./MnmComments');
 var MnmEntradaInfo = require('./MnmEntradaInfo');
 var MnmWebviewEntry = require('./MnmWebviewEntry');
@@ -37,9 +38,11 @@ class NavButton extends Component {
 class MnmEntrada extends Component {
     constructor(props) {
         super(props);
+        var thumborURL = new ThumborURLBuilder('koodae2Veegohb2iezeik7ohgai3ohqu', 'http://thumbor.eduherraiz.com');
         if (this.props.entrada.thumb) {
             var entry = this.props.entrada;
-            this.props.entrada.mediaHeader = 'http://thumbor.eduherraiz.com/unsafe/' + screen.width * screen.scale + 'x' + screen.height + '/smart/' + entry.thumb.substr(8, entry.thumb.length);
+            var imagePath = entry.thumb.substr(8, entry.thumb.length);
+            this.props.entrada.mediaHeader = thumborURL.setImagePath(imagePath).resize(screen.width * screen.scale, screen.height).smartCrop(true).buildUrl();
         }
         this.state = {
             value: 'Noticia'
@@ -55,7 +58,6 @@ class MnmEntrada extends Component {
     }
 
     _titlePressed() {
-        // LinkingIOS.openURL(this.props.entrada.original_url);
         this.props.navigator.push({
             title: this.props.entrada.title,
             component: MnmWebviewEntry,
@@ -117,7 +119,7 @@ class MnmEntrada extends Component {
             <Navigator style={styles.container}
                 initialRoute={{name: 'Entrada', index: 0}}
                 renderScene={this.detailRender.bind(this)}
-                configureScene={(route) => {
+                configureScene={() => {
                     return Navigator.SceneConfigs.FloatFromBottom;
                 }}
             />

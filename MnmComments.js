@@ -145,7 +145,7 @@ var styles = StyleSheet.create({
         color: '#95a5a6',
     },
     date: {
-        flex: 3,
+        flex: 4,
         fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',

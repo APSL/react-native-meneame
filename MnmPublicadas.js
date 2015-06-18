@@ -19,7 +19,8 @@ var {
 var screen = require('Dimensions').get('window');
 var moment = require('moment');
 var Icon = require('EvilIcons');
-var RefreshableListView = require('react-native-refreshable-listview');
+// var RefreshableListView = require('react-native-refreshable-listview');
+var ThumborURLBuilder = require('thumbor-url-builder');
 
 var MnmEntrada = require('./MnmEntrada');
 
@@ -48,13 +49,7 @@ class MnmPublicadas extends Component {
         this._getPublicadas();
     }
 
-    calculateStarredPoints(entry, now: Date) {
-        // Taken from: https://github.com/gallir/Meneame/blob/96ea1d7d3ca0fdbce3243b75b4d4bc92806dfd5f/www/libs/html1.php
-        return (entry.votes - entry.negatives * 2) * (1 - (now.getTime() - new Date(entry.date).getTime()) * 0.8 / 129600);
-    }
-
     _getPublicadas() {
-        // 'https://morning-headland-2952.herokuapp.com';
         var url = 'https://www.meneame.net/api/list';
         if (this.props.section === 'Nuevas') {
             url = url + '/?status=queued';
@@ -68,10 +63,12 @@ class MnmPublicadas extends Component {
         fetch(url)
         .then(response => response.json())
         .then(response => {
+            var thumborURL = new ThumborURLBuilder('koodae2Veegohb2iezeik7ohgai3ohqu', 'http://thumbor.eduherraiz.com');
             var entries = response.objects.map((entry) => {
                 entry.dateFromNow = moment.unix(entry.date).fromNow();
                 if (entry.thumb) {
-                    entry.mediaPublished = 'http://thumbor.eduherraiz.com/unsafe/' + (screen.width * 2) + 'x310/smart/' + entry.thumb.substr(8, entry.thumb.length);
+                    var imagePath = entry.thumb.substr(8, entry.thumb.length);
+                    entry.mediaPublished = thumborURL.setImagePath(imagePath).resize(screen.width * screen.scale, 310).smartCrop(true).buildUrl();
                 }
                 return entry;
             });
