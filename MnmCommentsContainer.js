@@ -15,7 +15,6 @@ var {
 } = React;
 
 var NavigationBar = require('react-native-navbar');
-var IonIcon = require('Ionicons');
 
 var MnmComments = require('./MnmComments');
 
@@ -34,7 +33,6 @@ class MnmCommentsContainer extends Component {
     }
 
     render() {
-        // <IonIcon name='close-round' size={20} />
         return (
             <Navigator
                 initialRoute={{

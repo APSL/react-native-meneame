@@ -8,10 +8,11 @@ var {
     AppRegistry,
     StyleSheet,
     Text,
+    Image,
     View,
     TabBarIOS,
     Navigator,
-    TouchableOpacity,
+    TouchableHighlight,
     Component
 } = React;
 
@@ -20,6 +21,7 @@ var IonIcon = require('Ionicons');
 var NavigationBar = require('react-native-navbar');
 
 var MnmPublicadas = require('./MnmPublicadas');
+var MnmAbout = require('./MnmAbout');
 
 class mnm extends Component {
     constructor(props) {
@@ -29,23 +31,44 @@ class mnm extends Component {
         };
     }
 
-    _renderSection() {
+    _openAbout() {
+        this.navigator.push({
+            component: MnmAbout,
+            navigationBar:
+                <NavigationBar
+                    title={'Acerca de'}
+                    buttonsColor='#d35400'
+                    prevTitle='Atrás'
+                    navigator={{}}
+                    route={{}}
+                />
+        });
+    }
+
+    _renderContentWithComponent(component) {
         return (
             <Navigator
                 style={styles.container}
                 initialRoute={{
-                    title: this.state.selectedTab,
-                    component: MnmPublicadas,
+                    component: component,
                     passProps: {section: this.state.selectedTab},
                     navigationBar:
                         <NavigationBar
                             title={this.state.selectedTab}
                             navigator={{}}
                             route={{}}
+                            customPrev={
+                                <TouchableHighlight
+                                    onPress={this._openAbout}
+                                    underlayColor='#FFFFFF'
+                                    style={styles.button}>
+                                    <Image source={require('image!settings')} />
+                                </TouchableHighlight>
+                            }
                         />
                 }}
                 renderScene={(route, nav) => {
-                    var props = route.passProps;
+                    var props = route.passProps || {};
                     props.navigator = nav;
                     var navBar = route.navigationBar;
                     if (navBar) {
@@ -54,13 +77,13 @@ class mnm extends Component {
                             route: route
                         });
                     }
-                    var component = React.createElement.bind(this)(
+                    var element = React.createElement.bind(this)(
                         route.component, props
                     );
                     return (
                         <View style={{flex: 1}}>
                             {navBar}
-                            {component}
+                            {element}
                         </View>
                     );
                 }}
@@ -86,7 +109,7 @@ class mnm extends Component {
                             selectedTab: 'Portada'
                         });
                     }}>
-                    {this._renderSection()}
+                    {this._renderContentWithComponent(MnmPublicadas)}
                 </IonIcon.TabBarItem>
                 <IonIcon.TabBarItem title='Nuevas'
                     iconName='ios-time-outline'
@@ -97,7 +120,7 @@ class mnm extends Component {
                             selectedTab: 'Nuevas'
                         });
                     }}>
-                    {this._renderSection()}
+                    {this._renderContentWithComponent(MnmPublicadas)}
                 </IonIcon.TabBarItem>
                 <IonIcon.TabBarItem title='Populares'
                     iconName='ios-heart-outline'
@@ -108,7 +131,7 @@ class mnm extends Component {
                             selectedTab: 'Populares'
                         });
                     }}>
-                    {this._renderSection()}
+                    {this._renderContentWithComponent(MnmPublicadas)}
                 </IonIcon.TabBarItem>
                 <IonIcon.TabBarItem title='Más visitadas'
                     iconName='ios-flame-outline'
@@ -119,7 +142,7 @@ class mnm extends Component {
                             selectedTab: 'Más visitadas'
                         });
                     }}>
-                    {this._renderSection()}
+                    {this._renderContentWithComponent(MnmPublicadas)}
                 </IonIcon.TabBarItem>
                 <IonIcon.TabBarItem title='Destacadas'
                     iconName='ios-star-outline'
@@ -130,7 +153,7 @@ class mnm extends Component {
                             selectedTab: 'Destacadas'
                         });
                     }}>
-                    {this._renderSection()}
+                    {this._renderContentWithComponent(MnmPublicadas)}
                 </IonIcon.TabBarItem>
             </TabBarIOS>
         );
@@ -143,6 +166,18 @@ var styles = StyleSheet.create({
     },
     navBar: {
         backgroundColor: '#FAFAFA',
+    },
+    button: {
+        paddingLeft: 5,
+        width: 44,
+        height: 44,
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 3,
+    },
+    text: {
+        color: '#d35400',
+        alignSelf: 'center',
     },
 });
 
