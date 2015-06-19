@@ -7,15 +7,27 @@ var React = require('react-native');
 var {
     StyleSheet,
     View,
+    StatusBarIOS,
     WebView,
     Component
 } = React;
 
 class MnmWebviewEntry extends Component {
+    componentDidMount() {
+        StatusBarIOS.setHidden(false, true);
+    }
+
+    componentWillUnmount() {
+        StatusBarIOS.setHidden(true, true);
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <WebView url={this.props.url} />
+                <WebView
+                    url={this.props.url}
+                    automaticallyAdjustContentInsets={false}
+                />
             </View>
         );
     }

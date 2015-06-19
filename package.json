@@ -10,6 +10,7 @@
     "react-native": "^0.6.0-rc",
     "react-native-blur": "^0.5.2",
     "react-native-button": "^1.2.0",
+    "react-native-navbar": "git+https://github.com/APSL/react-native-navbar.git",
     "react-native-parallax-view": "git+ssh://git@github.com/alvaromb/react-native-parallax-view.git",
     "react-native-refreshable-listview": "^1.2.0",
     "react-native-vector-icons": "^0.6.0",

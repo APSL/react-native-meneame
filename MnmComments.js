@@ -16,6 +16,7 @@ var {
     WebView,
     Component
 } = React;
+
 var moment = require('moment');
 var Icon = require('EvilIcons');
 
@@ -81,12 +82,15 @@ class MnmComments extends Component {
         if (this.state.rows.length > 0) {
             return <ListView style={styles.navcomments}
                         dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}/>;
+                        renderRow={this.renderRow.bind(this)}
+                        automaticallyAdjustContentInsets={false}
+                    />;
         } else {
             return <ActivityIndicatorIOS
                         animating={true}
                         style={styles.centering}
-                        color='#262626'/>;
+                        color='#262626'
+                    />;
         }
     }
 

@@ -11,6 +11,7 @@ var {
     Image,
     Text,
     SegmentedControlIOS,
+    StatusBarIOS,
     Navigator,
     TouchableHighlight,
     ListView,
@@ -20,8 +21,9 @@ var screen = require('Dimensions').get('window');
 var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 var ThumborURLBuilder = require('thumbor-url-builder');
+var NavigationBar = require('react-native-navbar');
 
-var MnmComments = require('./MnmComments');
+var MnmCommentsContainer = require('./MnmCommentsContainer');
 var MnmEntradaInfo = require('./MnmEntradaInfo');
 var MnmWebviewEntry = require('./MnmWebviewEntry');
 
@@ -61,18 +63,44 @@ class MnmEntrada extends Component {
         this.props.navigator.push({
             title: this.props.entrada.title,
             component: MnmWebviewEntry,
-            passProps: {url: this.props.entrada.go}
+            passProps: {url: this.props.entrada.go},
+            navigationBar:
+                <NavigationBar
+                    title={this.props.entrada.title.substring(0, 25) + '...'}
+                    buttonsColor='#d35400'
+                    prevTitle='Atrás'
+                    navigator={{}}
+                    route={{}}
+                />
         });
     }
 
-    renderEntryView(entrada, nav) {
+    _switchDetails(value) {
+        this.setState({
+            value: value
+        });
+    }
+
+    componentDidMount() {
+        StatusBarIOS.setHidden(true, true);
+    }
+
+    componentWillUnmount() {
+        StatusBarIOS.setHidden(false, true);
+    }
+
+    render() {
+        var entrada = this.props.entrada;
         return (
             <ParallaxView
                 backgroundSource={{uri: entrada.mediaHeader}}
-                windowHeight={120}>
+                windowHeight={120}
+                automaticallyAdjustContentInsets={false}
+                style={{backgroundColor: '#FAFAFA'}}>
                 <View style={styles.container}>
                     <View style={styles.info}>
-                        <TouchableHighlight onPress={this._titlePressed.bind(this)}
+                        <TouchableHighlight
+                            onPress={this._titlePressed.bind(this)}
                             underlayColor={'#FAFAFA'}>
                             <Text style={styles.title}>{entrada.title}</Text>
                         </TouchableHighlight>
@@ -86,9 +114,9 @@ class MnmEntrada extends Component {
                         onValueChange={this._switchDetails.bind(this)}/>
                     {this._renderSegmented(entrada)}
                     <NavButton onPress={() => {
-                        nav.push({
+                        this.props.navigator.push({
                             index: 1,
-                            component: MnmComments,
+                            component: MnmCommentsContainer,
                             sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
                             passProps: {entryId: entrada.id}
                         });
@@ -96,33 +124,6 @@ class MnmEntrada extends Component {
                     style={styles.button}/>
                 </View>
             </ParallaxView>
-        );
-    }
-
-    _switchDetails(value) {
-        this.setState({
-            value: value
-        });
-    }
-
-    detailRender(route, nav) {
-        switch (route.index) {
-            case 1:
-                return <MnmComments entryId={this.props.entrada.id}/>;
-            default:
-                return this.renderEntryView(this.props.entrada, nav);
-        }
-    }
-
-    render() {
-        return (
-            <Navigator style={styles.container}
-                initialRoute={{name: 'Entrada', index: 0}}
-                renderScene={this.detailRender.bind(this)}
-                configureScene={() => {
-                    return Navigator.SceneConfigs.FloatFromBottom;
-                }}
-            />
         );
     }
 }

@@ -10,12 +10,14 @@ var {
     Text,
     View,
     TabBarIOS,
-    NavigatorIOS,
+    Navigator,
+    TouchableOpacity,
     Component
 } = React;
 
 require('moment/locale/es');
 var IonIcon = require('Ionicons');
+var NavigationBar = require('react-native-navbar');
 
 var MnmPublicadas = require('./MnmPublicadas');
 
@@ -29,14 +31,46 @@ class mnm extends Component {
 
     _renderSection() {
         return (
-            <NavigatorIOS
+            <Navigator
                 style={styles.container}
-                tintColor={'#d35400'}
                 initialRoute={{
                     title: this.state.selectedTab,
                     component: MnmPublicadas,
-                    passProps: {section: this.state.selectedTab}
-                }}/>
+                    passProps: {section: this.state.selectedTab},
+                    navigationBar:
+                        <NavigationBar
+                            title={this.state.selectedTab}
+                            navigator={{}}
+                            route={{}}
+                        />
+                }}
+                renderScene={(route, nav) => {
+                    var props = route.passProps;
+                    props.navigator = nav;
+                    var navBar = route.navigationBar;
+                    if (navBar) {
+                        navBar = React.cloneElement(navBar, {
+                            navigator: nav,
+                            route: route
+                        });
+                    }
+                    var component = React.createElement.bind(this)(
+                        route.component, props
+                    );
+                    return (
+                        <View style={{flex: 1}}>
+                            {navBar}
+                            {component}
+                        </View>
+                    );
+                }}
+                configureScene={(route) => {
+                    if (route.sceneConfig) {
+                        return route.sceneConfig;
+                    }
+                    return Navigator.SceneConfigs.FloatFromRight;
+                }}
+            />
         );
     }
 
@@ -106,7 +140,10 @@ class mnm extends Component {
 var styles = StyleSheet.create({
     container: {
         flex: 1
-    }
+    },
+    navBar: {
+        backgroundColor: '#FAFAFA',
+    },
 });
 
 AppRegistry.registerComponent('mnm', () => mnm);

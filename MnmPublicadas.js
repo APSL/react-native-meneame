@@ -13,13 +13,13 @@ var {
     ListView,
     TouchableHighlight,
     ActivityIndicatorIOS,
+    StatusBarIOS,
     Component
 } = React;
 
 var screen = require('Dimensions').get('window');
 var moment = require('moment');
 var Icon = require('EvilIcons');
-// var RefreshableListView = require('react-native-refreshable-listview');
 var ThumborURLBuilder = require('thumbor-url-builder');
 
 var MnmEntrada = require('./MnmEntrada');
@@ -81,9 +81,8 @@ class MnmPublicadas extends Component {
 
     rowPressed(entry) {
         this.props.navigator.push({
-            title: 'Artículo',
             component: MnmEntrada,
-            passProps: {entrada: entry}
+            passProps: {entrada: entry},
         });
     }
 
@@ -127,20 +126,18 @@ class MnmPublicadas extends Component {
 
     _renderList() {
         if (this.state.published.length > 0) {
-            // return <RefreshableListView
-            //             loadData={this._getPublicadas}
-            //             style={styles.list}
-            //             dataSource={this.state.dataSource}
-            //             renderRow={this.renderRow.bind(this)}/>;
             return <ListView style={styles.list}
                         dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}/>;
+                        renderRow={this.renderRow.bind(this)}
+                        automaticallyAdjustContentInsets={false}
+                    />;
         } else {
             return <ActivityIndicatorIOS
                         animating={true}
                         style={styles.centering}
                         color='#262626'
-                        size='large'/>;
+                        size='large'
+                    />;
         }
     }
 
@@ -173,7 +170,7 @@ var styles = StyleSheet.create({
         paddingBottom: 25,
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 15,
+        // marginTop: 15,
         borderBottomColor: '#BDC3C7',
         borderBottomWidth: 1 / PixelRatio.get(),
     },
