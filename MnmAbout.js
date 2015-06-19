@@ -20,17 +20,20 @@ class MnmAbout extends Component {
         return (
             <View style={styles.container}>
                 <Image source={require('image!logo_apsl')} style={styles.image} />
-                <Text style={styles.madeBy}>App made with ❤️ by APSL</Text>
+                <Text style={styles.madeBy}>Made with ❤️ by APSL</Text>
                 <TouchableHighlight
                     onPress={() => {
                         LinkingIOS.openURL('http://publicsource.apple.com/license/apsl/');
                     }}
                     underlayColor='#FFFFFF'
                     style={styles.license}>
-                    <Text style={styles.licenseText}>
-                        Released under APSL license. 2015.
+                    <Text style={styles.text}>
+                        Released under APSL license, 2015
                     </Text>
                 </TouchableHighlight>
+                <Text style={styles.text}>
+                    Thanks to meneame.net and the React Native community
+                </Text>
             </View>
         );
     }
@@ -44,7 +47,9 @@ var styles = StyleSheet.create({
         alignItems: 'center',
     },
     madeBy: {
+        fontFamily: 'Helvetica Neue',
         textAlign: 'center',
+        fontWeight: '300',
     },
     image: {
         width: 75,
@@ -53,9 +58,16 @@ var styles = StyleSheet.create({
     },
     license: {
         textAlign: 'center',
-        marginTop: 15,
+        marginTop: 10,
     },
-    licenseText: {}
+    text: {
+        marginTop: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        fontFamily: 'Helvetica Neue',
+        fontWeight: '300',
+        textAlign: 'center',
+    }
 });
 
 module.exports = MnmAbout;
