@@ -10,8 +10,8 @@ var {
     Text,
     Component
 } = React;
-var IonIcon = require('Ionicons');
-var EvilIcon = require('EvilIcons');
+var IonIcon = require('react-native-vector-icons/Ionicons');
+var EvilIcon = require('react-native-vector-icons/EvilIcons');
 
 class MnmEntradaInfo extends Component {
     render() {

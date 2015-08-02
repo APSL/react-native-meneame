@@ -17,7 +17,7 @@ var {
 } = React;
 
 require('moment/locale/es');
-var IonIcon = require('Ionicons');
+var IonIcon = require('react-native-vector-icons/Ionicons');
 var NavigationBar = require('react-native-navbar');
 
 var MnmPublicadas = require('./MnmPublicadas');

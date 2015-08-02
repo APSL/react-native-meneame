@@ -18,7 +18,7 @@ var {
 } = React;
 
 var moment = require('moment');
-var Icon = require('EvilIcons');
+var Icon = require('react-native-vector-icons/EvilIcons');
 
 class MnmComments extends Component {
     constructor(props) {

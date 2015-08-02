@@ -19,7 +19,7 @@ var {
 
 var screen = require('Dimensions').get('window');
 var moment = require('moment');
-var Icon = require('EvilIcons');
+var Icon = require('react-native-vector-icons/EvilIcons');
 var ThumborURLBuilder = require('thumbor-url-builder');
 
 var MnmEntrada = require('./MnmEntrada');
@@ -132,9 +132,10 @@ class MnmPublicadas extends Component {
                         automaticallyAdjustContentInsets={false}
                     />;
         } else {
-            return <ActivityIndicatorIOS
+          return
+            <ActivityIndicatorIOS
+          style={styles.centering}
                         animating={true}
-                        style={styles.centering}
                         color='#262626'
                         size='large'
                     />;
@@ -170,7 +171,6 @@ var styles = StyleSheet.create({
         paddingBottom: 25,
         marginLeft: 10,
         marginRight: 10,
-        // marginTop: 15,
         borderBottomColor: '#BDC3C7',
         borderBottomWidth: 1 / PixelRatio.get(),
     },

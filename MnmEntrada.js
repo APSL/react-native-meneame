@@ -94,7 +94,7 @@ class MnmEntrada extends Component {
         return (
             <ParallaxView
                 backgroundSource={{uri: entrada.mediaHeader}}
-                windowHeight={120}
+                windowHeight={250}
                 style={{backgroundColor: '#FAFAFA'}}>
                 <View style={styles.container}>
                     <View style={styles.info}>
