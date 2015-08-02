@@ -13,8 +13,10 @@ var {
     TouchableHighlight,
     ActivityIndicatorIOS,
     ListView,
+    WebView,
     Component
 } = React;
+
 var moment = require('moment');
 var Icon = require('EvilIcons');
 
@@ -22,7 +24,7 @@ class MnmComments extends Component {
     constructor(props) {
         super(props);
         var dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1.comment_id !== r2.comment_id
+            rowHasChanged: (r1, r2) => r1.id !== r2.id
         });
         this.state = {
             dataSource: dataSource.cloneWithRows([]),
@@ -32,14 +34,13 @@ class MnmComments extends Component {
     }
 
     _getComments() {
-        fetch('https://morning-headland-2952.herokuapp.com/comments/' + this.props.entryId + '/')
+        fetch('https://www.meneame.net/api/list?id=' + this.props.entryId)
         .then(response => response.json())
         .then(response => {
             var comments = [];
-            response.comments.forEach((comment) => {
-                comment.order = parseInt(comment.order);
-                comment.date = moment(comment.date);
-                comment.from_now = comment.date.fromNow();
+            response.objects.forEach((comment) => {
+                comment.date = moment.unix(comment.date);
+                comment.fromNow = comment.date.fromNow();
                 comments.push(comment);
             });
             var sortedComments = comments.sort((c1, c2) => {
@@ -56,22 +57,22 @@ class MnmComments extends Component {
         });
     }
 
-    renderRow(rowData, sectionID, rowID) {
+    renderRow(rowData) {
         return (
             <View style={styles.cellContainer}>
                 <View style={styles.infoContainer}>
-                    <Text style={styles.username}>{rowData.username}</Text>
+                    <Text style={styles.username}>{rowData.user}</Text>
                     <Icon style={styles.icon} name='like' size={20}
                         color='#95a5a6'/>
                     <Text style={styles.votes}>{rowData.votes}</Text>
                     <Icon style={styles.iconKarma} name='heart' size={20}
                         color='#95a5a6'/>
                     <Text style={styles.karma}>{rowData.karma}</Text>
-                    <Text style={styles.date}>{rowData.from_now}</Text>
+                    <Text style={styles.date}>{rowData.fromNow}</Text>
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.commentNumber}>#{rowData.order}</Text>
-                    <Text style={styles.comment}>{rowData.comment}</Text>
+                    <Text style={styles.comment}>{rowData.content}</Text>
                 </View>
             </View>
         );
@@ -81,17 +82,20 @@ class MnmComments extends Component {
         if (this.state.rows.length > 0) {
             return <ListView style={styles.navcomments}
                         dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}/>;
+                        renderRow={this.renderRow.bind(this)}
+                        automaticallyAdjustContentInsets={false}
+                    />;
         } else {
             return <ActivityIndicatorIOS
                         animating={true}
                         style={styles.centering}
-                        color='#262626'/>;
+                        color='#262626'
+                    />;
         }
     }
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
                 {this._renderList()}
             </View>
@@ -145,7 +149,7 @@ var styles = StyleSheet.create({
         color: '#95a5a6',
     },
     date: {
-        flex: 3,
+        flex: 4,
         fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',

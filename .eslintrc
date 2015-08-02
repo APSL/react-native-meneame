@@ -1,0 +1,13 @@
+{
+    "parser": "babel-eslint",
+    "plugins": ["react"],
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "rules": {
+        "quotes": [1, "single"],
+        "no-underscore-dangle": [0],
+        "comma-dangle": [0],
+        "no-use-before-define": [0]
+    }
+}
