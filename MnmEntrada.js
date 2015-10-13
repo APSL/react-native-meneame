@@ -137,7 +137,6 @@ var styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     headerTitle: {
-        fontFamily: 'Helvetica Neue',
         alignItems: 'flex-end',
         color: '#ecf0f1',
         fontSize: 20,
@@ -150,7 +149,6 @@ var styles = StyleSheet.create({
         backgroundColor: '#FAFAFA',
     },
     title: {
-        fontFamily: 'Helvetica Neue',
         fontWeight: '300',
         color: '#262626',
         fontSize: 20,
@@ -158,7 +156,6 @@ var styles = StyleSheet.create({
         paddingBottom: 10,
     },
     from: {
-        fontFamily: 'Helvetica Neue',
         fontWeight: '300',
         color: '#7f8c8d',
         fontSize: 12,
@@ -174,7 +171,6 @@ var styles = StyleSheet.create({
         paddingBottom: 10,
     },
     meneos: {
-        fontFamily: 'Helvetica Neue',
         fontWeight: '300',
         color: '#d35400',
         marginBottom: 5,
@@ -183,7 +179,6 @@ var styles = StyleSheet.create({
         marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
-        fontFamily: 'Helvetica Neue',
         fontWeight: '300',
         color: '#7f8c8d',
         fontSize: 14,

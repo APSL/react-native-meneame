@@ -47,7 +47,6 @@ var styles = StyleSheet.create({
         alignItems: 'center',
     },
     madeBy: {
-        fontFamily: 'Helvetica Neue',
         textAlign: 'center',
         fontWeight: '300',
     },
@@ -64,7 +63,6 @@ var styles = StyleSheet.create({
         marginTop: 10,
         paddingLeft: 20,
         paddingRight: 20,
-        fontFamily: 'Helvetica Neue',
         fontWeight: '300',
         textAlign: 'center',
     }

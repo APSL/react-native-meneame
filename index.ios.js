@@ -173,7 +173,7 @@ var styles = StyleSheet.create({
         height: 44,
         alignItems: 'center',
         justifyContent: 'center',
-        top: 3,
+        paddingTop: 40,
     },
     text: {
         color: '#d35400',

@@ -81,7 +81,7 @@ var styles = StyleSheet.create({
         height: 44,
         alignItems: 'center',
         justifyContent: 'center',
-        top: 3,
+        paddingTop: 35,
     },
     closeText: {
         color: '#d35400',

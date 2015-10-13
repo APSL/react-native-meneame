@@ -1,8 +1,6 @@
 /*jshint esnext: true*/
 /*global require, module, fetch*/
 
-'use strict';
-
 var React = require('react-native');
 var {
     StyleSheet,
@@ -39,6 +37,7 @@ class MnmEntryDate extends Component {
 class MnmPublicadas extends Component {
     constructor(props) {
         super(props);
+        StatusBarIOS.setStyle('default')
         var dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1.id !== r2.id
         });
@@ -183,7 +182,6 @@ var styles = StyleSheet.create({
     },
     meneos: {
         color: '#d35400',
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
         marginRight: 10,
@@ -191,7 +189,6 @@ var styles = StyleSheet.create({
     negatives: {
         flex: 1,
         color: '#e74c3c',
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
     },
@@ -201,7 +198,6 @@ var styles = StyleSheet.create({
     },
     commentsText: {
         color: '#95a5a6',
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
     },
@@ -211,7 +207,6 @@ var styles = StyleSheet.create({
     pubDate: {
         flex: 5,
         color: '#95a5a6',
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
         textAlign: 'right',
@@ -239,7 +234,6 @@ var styles = StyleSheet.create({
     title: {
         flex: 1,
         color: '#262626',
-        fontFamily: 'Helvetica Neue',
         fontWeight: '300',
         fontSize: 20,
         marginTop: 5,

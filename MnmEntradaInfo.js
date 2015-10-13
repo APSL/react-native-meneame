@@ -82,7 +82,6 @@ var styles = StyleSheet.create({
     },
     meneos: {
         flex: 6,
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
         color: '#d35400',
@@ -94,7 +93,6 @@ var styles = StyleSheet.create({
     },
     negatives: {
         flex: 6,
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
         color: '#95a5a6',
@@ -106,7 +104,6 @@ var styles = StyleSheet.create({
     },
     karma: {
         flex: 6,
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
         color: '#95a5a6',
@@ -118,7 +115,6 @@ var styles = StyleSheet.create({
     },
     comments: {
         flex: 6,
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
         color: '#95a5a6',
@@ -130,7 +126,6 @@ var styles = StyleSheet.create({
     },
     categories: {
         flex: 6,
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
         color: '#95a5a6',
@@ -141,7 +136,6 @@ var styles = StyleSheet.create({
     },
     username: {
         fontWeight: 'bold',
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         textAlign: 'center',
     },

@@ -131,7 +131,6 @@ var styles = StyleSheet.create({
     username: {
         flex: 5,
         fontWeight: 'bold',
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         color: '#262626',
     },
@@ -150,7 +149,6 @@ var styles = StyleSheet.create({
     },
     date: {
         flex: 4,
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
         fontWeight: '300',
         textAlign: 'right',
@@ -162,7 +160,6 @@ var styles = StyleSheet.create({
     commentNumber: {
         color: '#d35400',
         fontWeight: '300',
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
     },
     comment: {
@@ -170,7 +167,6 @@ var styles = StyleSheet.create({
         flex: 1,
         color: '#7f8c8d',
         fontWeight: '300',
-        fontFamily: 'Helvetica Neue',
         fontSize: 14,
     },
     centering: {
