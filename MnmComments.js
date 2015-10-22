@@ -106,6 +106,7 @@ class MnmComments extends Component {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#FAFAFA',
     },
     navcomments: {
         flex: 1,
@@ -171,8 +172,9 @@ var styles = StyleSheet.create({
     },
     centering: {
         flex: 1,
-        alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'center',
+        backgroundColor: '#FAFAFA',
     },
 });
 

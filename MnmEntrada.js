@@ -40,7 +40,7 @@ class NavButton extends Component {
 class MnmEntrada extends Component {
     constructor(props) {
         super(props);
-        var thumborURL = new ThumborURLBuilder('koodae2Veegohb2iezeik7ohgai3ohqu', 'http://thumbor.eduherraiz.com');
+        var thumborURL = new ThumborURLBuilder('ozaDuG6du4dahvae2ahhu7quo5pip3ca', 'http://thumbormeneame.eduherraiz.com');
         if (this.props.entrada.thumb) {
             var entry = this.props.entrada;
             var imagePath = entry.thumb.substr(8, entry.thumb.length);

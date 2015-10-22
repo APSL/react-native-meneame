@@ -62,7 +62,7 @@ class MnmPublicadas extends Component {
         fetch(url)
         .then(response => response.json())
         .then(response => {
-            var thumborURL = new ThumborURLBuilder('koodae2Veegohb2iezeik7ohgai3ohqu', 'http://thumbor.eduherraiz.com');
+            var thumborURL = new ThumborURLBuilder('ozaDuG6du4dahvae2ahhu7quo5pip3ca', 'http://thumbormeneame.eduherraiz.com');
             var entries = response.objects.map((entry) => {
                 entry.dateFromNow = moment.unix(entry.date).fromNow();
                 if (entry.thumb) {
