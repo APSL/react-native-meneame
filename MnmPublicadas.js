@@ -1,5 +1,3 @@
-/*jshint esnext: true*/
-/*global require, module, fetch*/
 
 var React = require('react-native');
 var {
@@ -19,6 +17,8 @@ var screen = require('Dimensions').get('window');
 var moment = require('moment');
 var Icon = require('react-native-vector-icons/EvilIcons');
 var ThumborURLBuilder = require('thumbor-url-builder');
+
+import { THUMBOR_KEY, THUMBOR_URL} from './ThumborConfig'
 
 var MnmEntrada = require('./MnmEntrada');
 
@@ -62,7 +62,7 @@ class MnmPublicadas extends Component {
         fetch(url)
         .then(response => response.json())
         .then(response => {
-            var thumborURL = new ThumborURLBuilder('ozaDuG6du4dahvae2ahhu7quo5pip3ca', 'http://thumbormeneame.eduherraiz.com');
+            var thumborURL = new ThumborURLBuilder(THUMBOR_KEY, THUMBOR_URL);
             var entries = response.objects.map((entry) => {
                 entry.dateFromNow = moment.unix(entry.date).fromNow();
                 if (entry.thumb) {

@@ -23,6 +23,7 @@ var ParallaxView = require('react-native-parallax-view');
 var ThumborURLBuilder = require('thumbor-url-builder');
 var NavigationBar = require('react-native-navbar');
 
+import { THUMBOR_KEY, THUMBOR_URL} from './ThumborConfig'
 var MnmCommentsContainer = require('./MnmCommentsContainer');
 var MnmEntradaInfo = require('./MnmEntradaInfo');
 var MnmWebviewEntry = require('./MnmWebviewEntry');
@@ -40,7 +41,7 @@ class NavButton extends Component {
 class MnmEntrada extends Component {
     constructor(props) {
         super(props);
-        var thumborURL = new ThumborURLBuilder('ozaDuG6du4dahvae2ahhu7quo5pip3ca', 'http://thumbormeneame.eduherraiz.com');
+        var thumborURL = new ThumborURLBuilder(THUMBOR_KEY, THUMBOR_URL);
         if (this.props.entrada.thumb) {
             var entry = this.props.entrada;
             var imagePath = entry.thumb.substr(8, entry.thumb.length);
