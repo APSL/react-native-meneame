@@ -7,19 +7,20 @@
   },
   "dependencies": {
     "moment": "^2.10.3",
-    "react-native": "^0.11.0",
-    "react-native-blur": ">=0.5.2",
+    "react": "^0.14.3",
+    "react-native": "^0.14.2",
     "react-native-button": ">=1.2.0",
-    "react-native-navbar": "^0.8.2",
+    "react-native-navbar": "^1.0.6",
     "react-native-parallax-view": "^2.0.2",
-    "react-native-refreshable-listview": ">=1.2.0",
-    "react-native-vector-icons": ">=0.6.0",
+    "react-native-vector-icons": ">=0.8.5",
+    "react-redux": "^4.0.0",
     "react-timer-mixin": "^0.13.2",
+    "redux": "^3.0.4",
     "thumbor-url-builder": "git+https://github.com/APSL/ThumborUrlBuilder.git"
   },
   "devDependencies": {
-    "babel-eslint": "^3.1.15",
-    "eslint": "^0.23.0",
-    "eslint-plugin-react": "^2.5.2"
+    "babel-eslint": "^4.1.5",
+    "eslint": "^1.9.0",
+    "eslint-plugin-react": "^3.9.0"
   }
 }
