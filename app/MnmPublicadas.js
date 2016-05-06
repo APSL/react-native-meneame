@@ -9,7 +9,7 @@ var {
     ListView,
     TouchableHighlight,
     ActivityIndicatorIOS,
-    StatusBarIOS,
+    StatusBar,
     Component
 } = React;
 
@@ -37,7 +37,7 @@ class MnmEntryDate extends Component {
 class MnmPublicadas extends Component {
     constructor(props) {
         super(props);
-        StatusBarIOS.setStyle('default')
+        StatusBar.setBarStyle('default')
         var dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1.id !== r2.id
         });

@@ -7,18 +7,18 @@ var React = require('react-native');
 var {
     StyleSheet,
     View,
-    StatusBarIOS,
+    StatusBar,
     WebView,
     Component
 } = React;
 
 class MnmWebviewEntry extends Component {
     componentDidMount() {
-        StatusBarIOS.setHidden(false, true);
+        StatusBar.setHidden(false, true);
     }
 
     componentWillUnmount() {
-        StatusBarIOS.setHidden(true, true);
+        StatusBar.setHidden(true, true);
     }
 
     render() {

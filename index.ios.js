@@ -2,28 +2,18 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-'use strict';
 
-var React = require('react-native');
-var {
-  AppRegistry,
-} = React;
-// var ReactRedux = require('react-redux/native');
-// var Stores = require('./app/Stores');
-var Meneame = require('./app/Meneame');
+import React, { Component } from 'react';
+import { AppRegistry } from 'react-native';
 
-var mnm = React.createClass({
-  render: function() {
+import Meneame from './app/Meneame'
 
-      // <ReactRedux.Provider store={Stores.store}>
-      //   {() => {
-      //     return <Meneame />
-      //   }}
-      // </ReactRedux.Provider>
+class mnm extends Component {
+  render () {
     return (
       <Meneame />
-    );
+    )
   }
-});
+}
 
 AppRegistry.registerComponent('mnm', () => mnm);

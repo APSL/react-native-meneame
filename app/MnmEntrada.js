@@ -7,7 +7,7 @@ var {
     View,
     Text,
     SegmentedControlIOS,
-    StatusBarIOS,
+    StatusBar,
     Navigator,
     TouchableHighlight,
     Component
@@ -78,11 +78,11 @@ class MnmEntrada extends Component {
     }
 
     componentDidMount() {
-        StatusBarIOS.setHidden(true, true);
+        StatusBar.setHidden(true, true);
     }
 
     componentWillUnmount() {
-        StatusBarIOS.setHidden(false, true);
+        StatusBar.setHidden(false, true);
     }
 
     render() {

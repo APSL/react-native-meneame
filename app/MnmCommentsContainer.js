@@ -7,7 +7,7 @@ var React = require('react-native');
 var {
     StyleSheet,
     Navigator,
-    StatusBarIOS,
+    StatusBar,
     TouchableHighlight,
     Text,
     View,
@@ -21,11 +21,11 @@ var MnmComments = require('./MnmComments');
 class MnmCommentsContainer extends Component {
 
     componentDidMount() {
-        StatusBarIOS.setHidden(false, true);
+        StatusBar.setHidden(false, true);
     }
 
     componentWillUnmount() {
-        StatusBarIOS.setHidden(true, false);
+        StatusBar.setHidden(true, false);
     }
 
     _close() {

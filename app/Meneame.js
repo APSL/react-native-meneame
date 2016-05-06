@@ -1,4 +1,6 @@
-import React, {
+import React from 'react';
+
+import {
   TabBarIOS,
   Navigator,
   TouchableHighlight,
@@ -44,7 +46,10 @@ class Meneame extends React.Component {
           passProps: {section: this.state.selectedTab},
           navigationBar:
           <NavigationBar
-            title={this.state.selectedTab}
+            title={{
+              title: this.state.selectedTab,
+              tintColor: '#d35400'
+            }}
             navigator={{}}
             route={{}}
             customPrev={
