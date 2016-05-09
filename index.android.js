@@ -1,10 +1,11 @@
-import React from 'react'
-import {
-  AppRegistry,
-} from 'react-native'
+'use strict';
+
+import { Component } from 'react';
+import { AppRegistry } from 'react-native'
+
 import ListTest from './app/ListTest'
 
-class mnm extends React.Component {
+class mnm extends Component {
   render() {
     return (
       <ListTest />

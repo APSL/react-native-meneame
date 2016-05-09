@@ -3,15 +3,12 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
-    StyleSheet,
-    View,
-    Text,
-    Component
-} = React;
+import React, { Component } from 'react'
+import { StyleSheet, View, Text } from 'react-native'
+
 var IonIcon = require('react-native-vector-icons/Ionicons');
 var EvilIcon = require('react-native-vector-icons/EvilIcons');
+
 
 class MnmEntradaInfo extends Component {
     render() {

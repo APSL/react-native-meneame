@@ -1,6 +1,6 @@
 
-var React = require('react-native');
-var {
+import React, { Component } from 'react'
+import {
     StyleSheet,
     View,
     PixelRatio,
@@ -9,9 +9,8 @@ var {
     ListView,
     TouchableHighlight,
     ActivityIndicatorIOS,
-    StatusBar,
-    Component
-} = React;
+    StatusBar
+} from 'react-native'
 
 var screen = require('Dimensions').get('window');
 var moment = require('moment');

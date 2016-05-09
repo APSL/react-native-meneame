@@ -3,22 +3,19 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
+import React, { Component } from 'react'
+import {
     StyleSheet,
     PixelRatio,
     View,
-    Image,
     Text,
-    TouchableHighlight,
     ActivityIndicatorIOS,
-    ListView,
-    WebView,
-    Component
-} = React;
+    ListView
+} from 'react-native'
 
 var moment = require('moment');
 var Icon = require('react-native-vector-icons/EvilIcons');
+
 
 class MnmComments extends Component {
     constructor(props) {

@@ -3,20 +3,19 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
+import React, { Component } from 'react'
+import {
     StyleSheet,
     Navigator,
     StatusBar,
     TouchableHighlight,
     Text,
-    View,
-    Component
-} = React;
+    View
+} from 'react-native'
 
 var NavigationBar = require('react-native-navbar');
-
 var MnmComments = require('./MnmComments');
+
 
 class MnmCommentsContainer extends Component {
 

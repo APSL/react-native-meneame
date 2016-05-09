@@ -3,14 +3,14 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
+import React, { Component } from 'react'
+import {
     StyleSheet,
     View,
     StatusBar,
-    WebView,
-    Component
-} = React;
+    WebView
+} from 'react-native'
+
 
 class MnmWebviewEntry extends Component {
     componentDidMount() {

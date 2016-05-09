@@ -1,16 +1,15 @@
-/*jshint esnext: true*/
 /*global require, module, fetch*/
 
-var React = require('react-native');
-var {
-    Text,
-    Image,
-    View,
-    LinkingIOS,
-    StyleSheet,
-    TouchableHighlight,
-    Component
-} = React;
+import React, { Component } from 'react'
+import {
+  Text,
+  Image,
+  View,
+  LinkingIOS,
+  StyleSheet,
+  TouchableHighlight,
+} from 'react-native'
+
 
 class MnmAbout extends Component {
     render() {
@@ -22,7 +21,7 @@ class MnmAbout extends Component {
                     onPress={() => {
                         LinkingIOS.openURL('http://publicsource.apple.com/license/apsl/');
                     }}
-                    underlayColor='#FFFFFF'
+                    underlayColor="#FFFFFF"
                     style={styles.license}>
                     <Text style={styles.text}>
                         Released under APSL license, 2015

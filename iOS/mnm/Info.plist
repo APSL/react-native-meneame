@@ -49,5 +49,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarIOSAppearance</key>
 	<false/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

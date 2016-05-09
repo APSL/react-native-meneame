@@ -1,7 +1,8 @@
 /*jshint esnext: true*/
 /*global require, module, fetch*/
-var React = require('react-native');
-var {
+
+import React, { Component } from 'react'
+import {
     StyleSheet,
     PixelRatio,
     View,
@@ -9,19 +10,20 @@ var {
     SegmentedControlIOS,
     StatusBar,
     Navigator,
-    TouchableHighlight,
-    Component
-} = React;
+    TouchableHighlight
+} from 'react-native'
+
 var screen = require('Dimensions').get('window');
 var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 var ThumborURLBuilder = require('thumbor-url-builder');
 var NavigationBar = require('react-native-navbar');
 
-import { THUMBOR_KEY, THUMBOR_URL} from './ThumborConfig'
+import { THUMBOR_KEY, THUMBOR_URL } from './ThumborConfig'
 var MnmCommentsContainer = require('./MnmCommentsContainer');
 var MnmEntradaInfo = require('./MnmEntradaInfo');
 var MnmWebviewEntry = require('./MnmWebviewEntry');
+
 
 class NavButton extends Component {
     render() {
