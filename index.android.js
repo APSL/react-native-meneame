@@ -1,6 +1,6 @@
 'use strict';
 
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { AppRegistry } from 'react-native'
 
 import ListTest from './app/ListTest'
