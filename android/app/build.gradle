@@ -119,6 +119,26 @@ android {
     }
 }
 
+/**
+ * React Native Vector Icons
+ * https://github.com/oblador/react-native-vector-icons#option-with-gradle
+ */
+project.ext.vectoricons = [
+    // Name of the font files you want to copy
+    iconFontNames: [
+      'Entypo.ttf',
+      'EvilIcons.ttf',
+      'FontAwesome.ttf',
+      'Foundation.ttf',
+      'Ionicons.ttf',
+      'MaterialIcons.ttf',
+      'Octiicons.ttf',
+      'Zocial.ttf'
+    ]
+]
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
