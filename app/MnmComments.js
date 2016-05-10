@@ -13,6 +13,8 @@ import {
     ListView
 } from 'react-native'
 
+import HTMLView from 'react-native-htmlview'
+
 var moment = require('moment');
 var Icon = require('react-native-vector-icons/EvilIcons');
 
@@ -69,7 +71,9 @@ class MnmComments extends Component {
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.commentNumber}>#{rowData.order}</Text>
-                    <Text style={styles.comment}>{rowData.content}</Text>
+                    <Text style={styles.comment}>
+                      <HTMLView value={rowData.content} stylesheet={htmlStyles} />
+                    </Text>
                 </View>
             </View>
         );
@@ -174,5 +178,11 @@ var styles = StyleSheet.create({
         backgroundColor: '#FAFAFA',
     },
 });
+
+const htmlStyles = StyleSheet.create({
+  b: {
+    fontWeight: '600',
+  }
+})
 
 module.exports = MnmComments;

@@ -4,7 +4,6 @@ import {
     View,
     ListView,
     ActivityIndicatorIOS,
-    StatusBar
 } from 'react-native'
 
 var MnmPublicadasRow = require('./MnmPublicadasRow');
@@ -18,7 +17,6 @@ import { THUMBOR_KEY, THUMBOR_URL} from './ThumborConfig'
 class MnmPublicadas extends Component {
     constructor(props) {
         super(props);
-        StatusBar.setBarStyle('default')
         var dataSource = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1.id !== r2.id
         });

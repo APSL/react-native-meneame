@@ -1,15 +1,20 @@
-'use strict';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ */
+'use strict'
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { AppRegistry } from 'react-native'
 
-import ListTest from './app/ListTest'
+import Meneame from './app/Meneame'
+
 
 class mnm extends Component {
-  render() {
+  render () {
     return (
-      <ListTest />
-    );
+      <Meneame />
+    )
   }
 }
 
