@@ -51,8 +51,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   info: {
-    borderBottomColor: '#7f8c8d',
-    borderBottomWidth: 1 / PixelRatio.get(),
     marginLeft: 20,
     marginRight: 20,
     marginTop: 10,
