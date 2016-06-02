@@ -46,7 +46,7 @@ export default class MnmEntryTextAndDetails extends Component {
 
 const styles = StyleSheet.create({
   story: {
-    margin: 20,
+    marginTop: 20,
     color: '#7f8c8d',
     fontSize: 14,
   },
@@ -56,11 +56,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     paddingBottom: 10,
-  },
-  segmented: {
-    marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
   },
 })
 

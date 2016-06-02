@@ -95,7 +95,7 @@ class MnmEntrada extends Component {
                             passProps: {entryId: entrada.id}
                         });
                     }} text={'Comentarios (' + entrada.comments + ')'}
-                    style={styles.button}/>
+                       style={styles.button}/>
                 </View>
             </ParallaxView>
         );
@@ -103,22 +103,6 @@ class MnmEntrada extends Component {
 }
 
 var styles = StyleSheet.create({
-    header: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        shadowColor: '#222',
-        shadowOpacity: 0.9,
-        shadowRadius: 2,
-        backgroundColor: 'transparent',
-    },
-    headerTitle: {
-        alignItems: 'flex-end',
-        color: '#ecf0f1',
-        fontSize: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        marginBottom: 5,
-    },
     container: {
         flex: 1,
         backgroundColor: '#FAFAFA',
@@ -140,16 +124,10 @@ var styles = StyleSheet.create({
         color: '#7f8c8d',
         fontSize: 12,
         marginBottom: 5,
-        paddingLeft: 10,
-    },
-    meneos: {
-        fontWeight: '300',
-        color: '#d35400',
-        marginBottom: 5,
     },
     button: {
         color: '#d35400',
-        marginTop: 20,
+        marginTop: 10,
         fontSize: 22,
         paddingTop: 15,
         paddingBottom: 25,

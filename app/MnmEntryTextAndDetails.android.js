@@ -11,7 +11,7 @@ import HTMLView from 'react-native-htmlview'
 
 var MnmEntradaInfo = require('./MnmEntradaInfo')
 
-const tabsOptions = ['Noticias', 'Detalles']
+const tabsOptions = ['NOTICIAS', 'DETALLES']
 
 export default class MnmEntryTextAndDetails extends Component {
   constructor(props) {
@@ -52,18 +52,6 @@ const styles = StyleSheet.create({
     margin: 20,
     color: '#7f8c8d',
     fontSize: 14,
-  },
-  info: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    paddingBottom: 10,
-  },
-  segmented: {
-    marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
   },
 })
 
