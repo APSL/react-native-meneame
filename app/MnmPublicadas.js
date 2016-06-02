@@ -7,10 +7,14 @@ import {
 } from 'react-native'
 
 var MnmPublicadasRow = require('./MnmPublicadasRow');
-var screen = require('Dimensions').get('window');
-var moment = require('moment');
-var ThumborURLBuilder = require('thumbor-url-builder');
 
+var screen = require('Dimensions').get('window');
+
+var moment = require('moment');
+require('moment/locale/es');
+moment.locale('es');
+
+var ThumborURLBuilder = require('thumbor-url-builder');
 import { THUMBOR_KEY, THUMBOR_URL} from './ThumborConfig'
 
 
