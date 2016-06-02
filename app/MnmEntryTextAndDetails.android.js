@@ -11,7 +11,6 @@ import HTMLView from 'react-native-htmlview'
 
 var MnmEntradaInfo = require('./MnmEntradaInfo')
 
-// const tabsColor = '#d35400'
 const tabsOptions = ['Noticias', 'Detalles']
 
 export default class MnmEntryTextAndDetails extends Component {
@@ -36,6 +35,10 @@ export default class MnmEntryTextAndDetails extends Component {
       <SegmentedControls
         options={tabsOptions}
         allowFontScaling={false}
+        tint= {'#d35400'}
+        selectedTint= {'white'}
+        selectedBackgroundColor={'#d35400'}
+        backTint= {'white'}
         onSelection={ option => { this.setState({option: option}) } }
         selectedOption={ this.state.option }
       />
