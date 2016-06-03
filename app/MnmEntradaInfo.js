@@ -17,12 +17,12 @@ class MnmEntradaInfo extends Component {
             <View style={styles.container}>
                 <View style={styles.leftContainer}>
                     <View style={styles.dataContainer}>
-                        <IonIcon style={styles.upArrow} name='ios-arrow-thin-up'
+                        <IonIcon style={styles.upArrow} name='ios-arrow-round-up'
                             size={30} color='#d35400'/>
                         <Text style={styles.meneos}>{e.votes} meneos</Text>
                     </View>
                     <View style={styles.dataContainer}>
-                        <IonIcon style={styles.downArrow} name='ios-arrow-thin-down'
+                        <IonIcon style={styles.downArrow} name='ios-arrow-round-down'
                             size={30} color='#95a5a6'/>
                         <Text style={styles.negatives}>{e.negatives} negativos</Text>
                     </View>
@@ -76,6 +76,7 @@ var styles = StyleSheet.create({
         flex: 1,
         bottom: 4,
         justifyContent: 'center',
+        marginLeft: 10,
     },
     meneos: {
         flex: 6,
@@ -87,6 +88,7 @@ var styles = StyleSheet.create({
         flex: 1,
         bottom: 4,
         justifyContent: 'center',
+        marginLeft: 10,
     },
     negatives: {
         flex: 6,
