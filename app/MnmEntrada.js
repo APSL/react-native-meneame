@@ -4,7 +4,6 @@ import {
     View,
     PixelRatio,
     Text,
-    StatusBar,
     Navigator,
     TouchableHighlight
 } from 'react-native'
@@ -17,7 +16,7 @@ var NavigationBar = require('react-native-navbar');
 
 import { THUMBOR_KEY, THUMBOR_URL } from './ThumborConfig'
 import MnmEntryTextAndDetails from './MnmEntryTextAndDetails'
-var MnmCommentsContainer = require('./MnmCommentsContainer');
+var MnmComments = require('./MnmComments');
 var MnmWebviewEntry = require('./MnmWebviewEntry');
 
 
@@ -61,14 +60,6 @@ class MnmEntrada extends Component {
         });
     }
 
-    componentDidMount() {
-        StatusBar.setHidden(true, true);
-    }
-
-    componentWillUnmount() {
-        StatusBar.setHidden(false, true);
-    }
-
     render() {
         var entrada = this.props.entrada;
         return (
@@ -90,7 +81,7 @@ class MnmEntrada extends Component {
                     <NavButton onPress={() => {
                         this.props.navigator.push({
                             index: 1,
-                            component: MnmCommentsContainer,
+                            component: MnmComments,
                             sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
                             passProps: {entryId: entrada.id}
                         });
