@@ -15,6 +15,7 @@
     "react-native-navigator-wrapper": "^0.2.0",
     "react-native-parallax-view": "^2.0.4",
     "react-native-radio-buttons": "^0.11.0",
+    "react-native-section-menu": "github:apsl/react-native-section-menu",
     "react-native-vector-icons": "^2.0.3",
     "react-timer-mixin": "^0.13.3",
     "thumbor-url-builder": "APSL/ThumborUrlBuilder"

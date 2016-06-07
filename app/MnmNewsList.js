@@ -6,7 +6,7 @@ import {
     ActivityIndicatorIOS,
 } from 'react-native'
 
-var MnmPublicadasRow = require('./MnmPublicadasRow');
+var MnmNewsRow = require('./MnmNewsRow');
 
 var screen = require('Dimensions').get('window');
 
@@ -32,17 +32,7 @@ class MnmPublicadas extends Component {
     }
 
     _getPublicadas() {
-        var url = 'https://www.meneame.net/api/list';
-        if (this.props.section === 'Nuevas') {
-            url = url + '/?status=queued';
-        } else if (this.props.section === 'Destacadas') {
-            url = url + '/?active';
-        } else if (this.props.section === 'Populares') {
-            url = url + '/?popular';
-        } else if (this.props.section === 'Más visitadas') {
-            url = url + '/?top_visited';
-        }
-        fetch(url)
+        fetch(this.props.url)
         .then(response => response.json())
         .then(response => {
             var thumborURL = new ThumborURLBuilder(THUMBOR_KEY, THUMBOR_URL);
@@ -63,7 +53,7 @@ class MnmPublicadas extends Component {
 
     renderRow(rowData) {
         return (
-            <MnmPublicadasRow entry={rowData} navigator={this.props.navigator} />
+            <MnmNewsRow entry={rowData} navigator={this.props.navigator} />
         );
     }
 
@@ -86,11 +76,11 @@ class MnmPublicadas extends Component {
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                {this._renderList()}
-            </View>
-        );
+      return (
+          <View style={styles.container}>
+              {this._renderList()}
+          </View>
+      );
     }
 }
 
