@@ -21,15 +21,15 @@ var Icon = require('react-native-vector-icons/EvilIcons');
 
 class MnmComments extends Component {
     constructor(props) {
-        super(props);
-        var dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1.id !== r2.id
-        });
-        this.state = {
-            dataSource: dataSource.cloneWithRows([]),
-            rows: []
-        };
-        this._getComments();
+      super(props);
+      var dataSource = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1.id !== r2.id
+      });
+      this.state = {
+        dataSource: dataSource.cloneWithRows([]),
+        rows: []
+      };
+      this._getComments();
     }
 
     _getComments() {
@@ -57,51 +57,56 @@ class MnmComments extends Component {
     }
 
     renderRow(rowData) {
-        return (
-            <View style={styles.cellContainer}>
-                <View style={styles.infoContainer}>
-                    <Text style={styles.username}>{rowData.user}</Text>
-                    <Icon style={styles.icon} name='like' size={20}
-                        color='#95a5a6'/>
-                    <Text style={styles.votes}>{rowData.votes}</Text>
-                    <Icon style={styles.iconKarma} name='heart' size={20}
-                        color='#95a5a6'/>
-                    <Text style={styles.karma}>{rowData.karma}</Text>
-                    <Text style={styles.date}>{rowData.fromNow}</Text>
-                </View>
-                <View style={styles.textContainer}>
-                    <Text style={styles.commentNumber}>#{rowData.order}</Text>
-                    <Text style={styles.comment}>
-                      <HTMLView value={rowData.content} stylesheet={htmlStyles} />
-                    </Text>
-                </View>
-            </View>
-        );
+      return (
+        <View style={styles.cellContainer}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.username}>{rowData.user}</Text>
+            <Icon style={styles.icon} name='like' size={20}
+                color='#95a5a6'/>
+            <Text style={styles.votes}>{rowData.votes}</Text>
+            <Icon style={styles.iconKarma} name='heart' size={20}
+                color='#95a5a6'/>
+            <Text style={styles.karma}>{rowData.karma}</Text>
+            <Text style={styles.date}>{rowData.fromNow}</Text>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.commentNumber}>#{rowData.order}</Text>
+            <Text style={styles.comment}>
+              <HTMLView value={rowData.content} stylesheet={htmlStyles} />
+            </Text>
+          </View>
+        </View>
+      );
     }
 
-    _renderList() {
-        if (this.state.rows.length > 0) {
-            return <ListView style={styles.navcomments}
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}
-                        automaticallyAdjustContentInsets={false}
-                    />;
-        } else {
-            return <ActivityIndicatorIOS
-                        animating={true}
-                        style={styles.centering}
-                        color='#262626'
-                    />;
-        }
+  _renderList() {
+    if (this.state.rows.length > 0) {
+      return (
+        <ListView style={styles.navcomments}
+          contentInset={{bottom: 49}}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)}
+          automaticallyAdjustContentInsets={false}
+        />
+      )
+    } else {
+      return (
+        <ActivityIndicatorIOS
+          animating={true}
+          style={styles.centering}
+          color='#262626'
+        />
+      )
     }
+  }
 
-    render() {
-        return (
-            <View style={styles.container}>
-                {this._renderList()}
-            </View>
-        );
-    }
+  render() {
+      return (
+          <View style={styles.container}>
+              {this._renderList()}
+          </View>
+      );
+  }
 }
 
 var styles = StyleSheet.create({
