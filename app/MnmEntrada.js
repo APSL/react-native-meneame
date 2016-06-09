@@ -45,19 +45,11 @@ class MnmEntrada extends Component {
     }
 
     _titlePressed() {
-        this.props.navigator.push({
-            title: this.props.entrada.title,
-            component: MnmWebviewEntry,
-            passProps: {url: this.props.entrada.go},
-            navigationBar:
-                <NavigationBar
-                    title={this.props.entrada.title.substring(0, 25) + '...'}
-                    buttonsColor="#d35400"
-                    prevTitle="Atrás"
-                    navigator={{}}
-                    route={{}}
-                />
-        });
+      this.props.navigator.push({
+        title: this.props.entrada.from,
+        component: MnmWebviewEntry,
+        passProps: {uri: this.props.entrada.go},
+      });
     }
 
     render() {

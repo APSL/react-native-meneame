@@ -28,7 +28,10 @@ class MnmPublicadas extends Component {
             dataSource: dataSource.cloneWithRows([]),
             published: []
         };
-        this._getPublicadas();
+    }
+
+    componentDidMount () {
+      this._getPublicadas();
     }
 
     _getPublicadas() {
