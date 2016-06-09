@@ -1,4 +1,5 @@
 import React from 'react'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 
 import { Menu } from 'react-native-section-menu'
@@ -13,7 +14,7 @@ import {
 
 class Meneame extends React.Component {
   render () {
-    const androidIconSize = 16
+    const androidIconSize = 18
     const iOSiconSize = 30
 
     return (
@@ -23,7 +24,7 @@ class Meneame extends React.Component {
             id: 0,
             title: 'Portada',
             element: <MnmSectionPortada />,
-            androidIcon: <Ionicon name="ios-paper" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name="description" size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-paper-outline',
             selectedIconName: 'ios-paper',
@@ -33,7 +34,7 @@ class Meneame extends React.Component {
             id: 1,
             title: 'Nuevas',
             element: <MnmSectionNuevas />,
-            androidIcon: <Ionicon name="ios-time" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name="access-time" size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-time-outline',
             selectedIconName: 'ios-time',
@@ -43,7 +44,7 @@ class Meneame extends React.Component {
             id: 2,
             title: 'Populares',
             element: <MnmSectionPopulares />,
-            androidIcon: <Ionicon name="ios-heart" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name="favorite" size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-heart-outline',
             selectedIconName: 'ios-heart',
@@ -53,7 +54,7 @@ class Meneame extends React.Component {
             id: 3,
             title: 'Más visitadas',
             element: <MnmSectionMasVisitadas />,
-            androidIcon: <Ionicon name="ios-flame" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name="whatshot" size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-flame-outline',
             selectedIconName: 'ios-flame',
@@ -63,7 +64,7 @@ class Meneame extends React.Component {
             id: 4,
             title: 'Destacadas',
             element: <MnmSectionDestacadas />,
-            androidIcon: <Ionicon name="ios-star" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name="grade" size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-star-outline',
             selectedIconName: 'ios-star',
