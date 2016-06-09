@@ -1,14 +1,11 @@
 import React from 'react'
-
+import { StyleSheet } from 'react-native'
 import { NavigatorWrapper } from 'react-native-navigator-wrapper'
 
 import mnmRouteMapper from './MnmRouteMapper'
 import MnmNewsList from './MnmNewsList'
 
-const navBarStyle = {backgroundColor: '#FAFAFA'}
-const routeMapper = mnmRouteMapper()
-
-export const MnmSectionPortada = () => {
+export function MnmSectionPortada({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
@@ -16,13 +13,13 @@ export const MnmSectionPortada = () => {
         passProps: {url: 'https://www.meneame.net/api/list/'},
         title: 'Portada',
       }}
-      navBarStyle={navBarStyle}
-      routeMapper={routeMapper}
+      navBarStyle={styles.navBarStyle}
+      routeMapper={mnmRouteMapper(openMenu)}
     />
   )
 }
 
-export function MnmSectionNuevas() {
+export function MnmSectionNuevas({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
@@ -30,13 +27,13 @@ export function MnmSectionNuevas() {
         passProps: {url: 'https://www.meneame.net/api/list/?status=queued'},
         title: 'Nuevas',
       }}
-      navBarStyle={navBarStyle}
-      routeMapper={routeMapper}
+      navBarStyle={styles.navBarStyle}
+      routeMapper={mnmRouteMapper(openMenu)}
     />
   )
 }
 
-export function MnmSectionPopulares() {
+export function MnmSectionPopulares({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
@@ -44,13 +41,13 @@ export function MnmSectionPopulares() {
         passProps: {url: 'https://www.meneame.net/api/list/?popular'},
         title: 'Populares',
       }}
-      navBarStyle={navBarStyle}
-      routeMapper={routeMapper}
+      navBarStyle={styles.navBarStyle}
+      routeMapper={mnmRouteMapper(openMenu)}
     />
   )
 }
 
-export function MnmSectionMasVisitadas() {
+export function MnmSectionMasVisitadas({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
@@ -58,13 +55,13 @@ export function MnmSectionMasVisitadas() {
         passProps: {url: 'https://www.meneame.net/api/list/?top_visited'},
         title: 'Más visitadas',
       }}
-      navBarStyle={navBarStyle}
-      routeMapper={routeMapper}
+      navBarStyle={styles.navBarStyle}
+      routeMapper={mnmRouteMapper(openMenu)}
     />
   )
 }
 
-export function MnmSectionDestacadas() {
+export function MnmSectionDestacadas({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
@@ -72,8 +69,12 @@ export function MnmSectionDestacadas() {
         passProps: {url: 'https://www.meneame.net/api/list/?active'},
         title: 'Destacadas',
       }}
-      navBarStyle={navBarStyle}
-      routeMapper={routeMapper}
+      navBarStyle={styles.navBarStyle}
+      routeMapper={mnmRouteMapper(openMenu)}
     />
   )
 }
+
+const styles = StyleSheet.create({
+  navBarStyle: {backgroundColor: '#FAFAFA'}
+})

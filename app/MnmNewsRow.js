@@ -38,6 +38,7 @@ class MnmPublicadasRow extends Component {
 
   rowPressed(entry) {
       this.props.navigator.push({
+          title: 'Noticia',
           component: MnmEntrada,
           passProps: {entrada: entry},
       });

@@ -80,7 +80,7 @@ class MnmEntrada extends Component {
                     <MnmEntryTextAndDetails entry={entrada} />
                     <NavButton onPress={() => {
                         this.props.navigator.push({
-                            index: 1,
+                            title: 'Comentarios',
                             component: MnmComments,
                             sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
                             passProps: {entryId: entrada.id}
