@@ -54,29 +54,32 @@ class MnmPublicadas extends Component {
         });
     }
 
-    renderRow(rowData) {
+    renderRow(rowData, sectionID, rowID, highlightRow) {
         return (
-            <MnmNewsRow entry={rowData} navigator={this.props.navigator} />
+            <MnmNewsRow key={`news${rowID}`} entry={rowData} navigator={this.props.navigator} />
         );
     }
 
-    _renderList() {
-        if (this.state.published.length > 0) {
-            return <ListView style={styles.list}
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}
-                        automaticallyAdjustContentInsets={false}
-                    />;
-        } else {
-          return (
-            <ActivityIndicatorIOS
-              style={styles.centering}
-              animating={true}
-              color="#262626"
-              size="large" />
-          );
-        }
+  _renderList() {
+    if (this.state.published.length > 0) {
+      return (
+        <ListView style={styles.list}
+          initialListSize={5}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)}
+          automaticallyAdjustContentInsets={false}
+        />
+      )
+    } else {
+      return (
+        <ActivityIndicatorIOS
+          style={styles.centering}
+          animating={true}
+          color="#262626"
+          size="large" />
+      )
     }
+  }
 
     render() {
       return (
