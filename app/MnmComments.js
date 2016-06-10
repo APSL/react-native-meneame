@@ -61,13 +61,13 @@ class MnmComments extends Component {
         <View style={styles.cellContainer}>
           <View style={styles.infoContainer}>
             <Text style={styles.username}>{rowData.user}</Text>
-            <Icon style={styles.icon} name='like' size={20}
-                color='#95a5a6'/>
-            <Text style={styles.votes}>{rowData.votes}</Text>
-            <Icon style={styles.iconKarma} name='heart' size={20}
-                color='#95a5a6'/>
-            <Text style={styles.karma}>{rowData.karma}</Text>
-            <Text style={styles.date}>{rowData.fromNow}</Text>
+            <View style={styles.commentData}>
+              <Icon style={styles.icon} name="like" size={20} />
+              <Text style={styles.counter}>{rowData.votes}</Text>
+              <Icon style={styles.icon} name="heart" size={20} />
+              <Text style={styles.counter}>{rowData.karma}</Text>
+              <Text style={styles.date}>{rowData.fromNow}</Text>
+            </View>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.commentNumber}>#{rowData.order}</Text>
@@ -136,29 +136,28 @@ var styles = StyleSheet.create({
         marginBottom: 10,
     },
     username: {
-        flex: 5,
+        flex: 1,
+        flexDirection: 'row',
         fontWeight: 'bold',
         fontSize: 14,
         color: '#262626',
     },
+    commentData: {
+        flex: 2,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
     icon: {
-        bottom: 3,
-    },
-    iconKarma: {
-        bottom: 3,
-        marginLeft: 10,
-    },
-    votes: {
+        width: 20,
         color: '#95a5a6',
     },
-    karma: {
+    counter: {
         color: '#95a5a6',
+        marginRight: 10,
     },
     date: {
-        flex: 4,
         fontSize: 14,
         fontWeight: '300',
-        textAlign: 'right',
         color: '#95a5a6',
     },
     textContainer: {
