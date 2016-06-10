@@ -53,10 +53,11 @@ class MnmEntrada extends Component {
     }
 
     render() {
-        var entrada = this.props.entrada;
+        const entrada = this.props.entrada
+        const backgroundSource = entrada.mediaHeader ? {uri: entrada.mediaHeader} : null
         return (
             <ParallaxView
-                backgroundSource={{uri: entrada.mediaHeader}}
+                backgroundSource={backgroundSource}
                 windowHeight={250}
                 style={{backgroundColor: '#FAFAFA'}}
                 contentInset={{bottom: 49}}>
