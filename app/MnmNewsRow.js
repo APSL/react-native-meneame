@@ -12,6 +12,7 @@ var EvilIcons = require('react-native-vector-icons/EvilIcons');
 var Ionicons = require('react-native-vector-icons/Ionicons');
 var screen = require('Dimensions').get('window');
 var MnmEntrada = require('./MnmEntrada');
+import { BrowserButton } from './MnmRouteMapper'
 
 
 class MnmEntryDate extends Component {
@@ -42,6 +43,7 @@ class MnmPublicadasRow extends Component {
           title: 'Noticia',
           component: MnmEntrada,
           passProps: {entrada: entry},
+          rightElement: <BrowserButton url={entry.go} />,
       });
   }
 

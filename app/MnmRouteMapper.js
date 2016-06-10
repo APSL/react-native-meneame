@@ -1,16 +1,34 @@
 import React from 'react'
-import { View, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Platform, TouchableOpacity, Linking } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+
 import {
   titleRouteMapperGenerator,
   CenteredText,
   NavBarBackButton,
+  defaultRouteMapper
 } from 'react-native-navigator-wrapper'
 
-const MenuButton = ({openMenu}) => {
+export const MenuButton = ({openMenu}) => {
   return (
     <TouchableOpacity style={styles.menuButtonContainer} onPress={openMenu}>
-      <MaterialIcons name="menu" size={24} color={menuColor} />
+      <MaterialIcons name="menu" size={24} color={navBarColor} />
+    </TouchableOpacity>
+  )
+}
+
+export const BrowserButton = ({url}) => {
+  let icon
+  if (Platform.OS === 'ios') {
+    icon = <FontAwesome name="safari" size={24} color={navBarColor} />
+  } else {
+    icon = <FontAwesome name="chrome" size={24} color={navBarColor} />
+  }
+
+  return (
+    <TouchableOpacity style={styles.browserButtonContainer} onPress={() => Linking.openURL(url)}>
+      {icon}
     </TouchableOpacity>
   )
 }
@@ -26,7 +44,7 @@ function leftButtonRouteMapperGenerator (openMenu) {
           <NavBarBackButton
             onPress={() => navigator.pop()}
             style={{flex: 1}}
-            tintColor={menuColor}
+            tintColor={navBarColor}
             showBackTitle={false} />
         </View>
       )
@@ -36,15 +54,21 @@ function leftButtonRouteMapperGenerator (openMenu) {
 
 export default function mnmRouteMapper(openMenu) {
   return {
+    ...defaultRouteMapper(),
     ...leftButtonRouteMapperGenerator(openMenu),
-    RightButton: () => null,
-    ...titleRouteMapperGenerator(CenteredText, Platform.OS === 'ios' ? styles.titleIos : styles.titleAndroid)
+    ...titleRouteMapperGenerator(CenteredText, Platform.OS === 'ios' ? styles.titleIos : styles.titleAndroid),
   }
 }
 
-const menuColor = '#d35400'
+const navBarColor = '#d35400'
 
 const styles = StyleSheet.create({
+  browserButtonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 12,
+  },
   menuButtonContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -58,11 +82,11 @@ const styles = StyleSheet.create({
     marginLeft: 6,
   },
   titleIos: {
-    color: menuColor,
+    color: navBarColor,
     fontSize: 18,
   },
   titleAndroid: {
-    color: menuColor,
+    color: navBarColor,
     fontSize: 18,
     fontWeight: 'bold'
   },

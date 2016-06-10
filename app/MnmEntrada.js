@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
     StyleSheet,
     View,
-    PixelRatio,
     Text,
     Navigator,
     TouchableHighlight
@@ -12,12 +11,12 @@ var screen = require('Dimensions').get('window');
 var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 var ThumborURLBuilder = require('thumbor-url-builder');
-var NavigationBar = require('react-native-navbar');
 
 import { THUMBOR_KEY, THUMBOR_URL } from './ThumborConfig'
 import MnmEntryTextAndDetails from './MnmEntryTextAndDetails'
 var MnmComments = require('./MnmComments');
 var MnmWebviewEntry = require('./MnmWebviewEntry');
+import { BrowserButton } from './MnmRouteMapper'
 
 
 class NavButton extends Component {
@@ -45,10 +44,12 @@ class MnmEntrada extends Component {
     }
 
     _titlePressed() {
+      const URL = this.props.entrada.go
       this.props.navigator.push({
         title: this.props.entrada.from,
         component: MnmWebviewEntry,
-        passProps: {uri: this.props.entrada.go},
+        passProps: {uri: URL},
+        rightElement: <BrowserButton url={URL} />
       });
     }
 
