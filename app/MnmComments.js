@@ -6,10 +6,12 @@
 import React, { Component } from 'react'
 import {
     StyleSheet,
+    Platform,
     PixelRatio,
     View,
     Text,
     ActivityIndicatorIOS,
+    ProgressBarAndroid,
     ListView
 } from 'react-native'
 
@@ -90,12 +92,19 @@ class MnmComments extends Component {
         />
       )
     } else {
+      if (Platform.OS === 'ios') {
+        return (
+          <ActivityIndicatorIOS
+            animating={true}
+            style={styles.centering}
+            color='#262626'
+          />
+        )
+      }
       return (
-        <ActivityIndicatorIOS
-          animating={true}
-          style={styles.centering}
-          color='#262626'
-        />
+        <View style={styles.centering}>
+          <ProgressBarAndroid style={styles.progressBar} color="#d35400"/>
+        </View>
       )
     }
   }
@@ -180,6 +189,10 @@ var styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         backgroundColor: '#FAFAFA',
+    },
+    progressBar: {
+      width: 50,
+      height: 50,
     },
 });
 
