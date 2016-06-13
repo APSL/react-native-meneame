@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Platform, TouchableOpacity, Linking } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import {
   titleRouteMapperGenerator,
@@ -9,6 +10,9 @@ import {
   NavBarBackButton,
   defaultRouteMapper
 } from 'react-native-navigator-wrapper'
+
+import MnmAbout from './MnmAbout'
+
 
 export const MenuButton = ({openMenu}) => {
   return (
@@ -28,6 +32,26 @@ export const BrowserButton = ({url}) => {
 
   return (
     <TouchableOpacity style={styles.browserButtonContainer} onPress={() => Linking.openURL(url)}>
+      {icon}
+    </TouchableOpacity>
+  )
+}
+
+export const AboutUsButton = ({navigator}) => {
+  let icon
+  if (Platform.OS === 'ios') {
+    icon = <Ionicons name="ios-information-circle" size={24} color={navBarColor} />
+  } else {
+    icon = <MaterialIcons name="info" size={24} color={navBarColor} />
+  }
+
+  return (
+    <TouchableOpacity style={styles.browserButtonContainer} onPress={() => {
+      navigator.push({
+        component: MnmAbout,
+        title: 'Acerca de',
+      })
+    }}>
       {icon}
     </TouchableOpacity>
   )

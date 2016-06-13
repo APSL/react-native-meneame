@@ -1,8 +1,8 @@
 import React from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicon from 'react-native-vector-icons/Ionicons'
-
 import { Menu } from 'react-native-section-menu'
+
 import {
   MnmSectionPortada,
   MnmSectionNuevas,
@@ -16,12 +16,13 @@ class Meneame extends React.Component {
   render () {
     const androidIconSize = 18
     const iOSiconSize = 30
+    let itemId = 0
 
     return (
       <Menu barTintColor="black" tintColor="#d35400" initialEntry={0}
         entries={[
           {
-            id: 0,
+            id: itemId++,
             title: 'Portada',
             element: <MnmSectionPortada />,
             androidIcon: <MaterialIcons name="description" size={androidIconSize} />,
@@ -31,7 +32,7 @@ class Meneame extends React.Component {
             iconSize: iOSiconSize,
           },
           {
-            id: 1,
+            id: itemId++,
             title: 'Nuevas',
             element: <MnmSectionNuevas />,
             androidIcon: <MaterialIcons name="access-time" size={androidIconSize} />,
@@ -41,7 +42,7 @@ class Meneame extends React.Component {
             iconSize: iOSiconSize,
           },
           {
-            id: 2,
+            id: itemId++,
             title: 'Populares',
             element: <MnmSectionPopulares />,
             androidIcon: <MaterialIcons name="favorite" size={androidIconSize} />,
@@ -51,7 +52,7 @@ class Meneame extends React.Component {
             iconSize: iOSiconSize,
           },
           {
-            id: 3,
+            id: itemId++,
             title: 'Más visitadas',
             element: <MnmSectionMasVisitadas />,
             androidIcon: <MaterialIcons name="whatshot" size={androidIconSize} />,
@@ -61,7 +62,7 @@ class Meneame extends React.Component {
             iconSize: iOSiconSize,
           },
           {
-            id: 4,
+            id: itemId++,
             title: 'Destacadas',
             element: <MnmSectionDestacadas />,
             androidIcon: <MaterialIcons name="grade" size={androidIconSize} />,

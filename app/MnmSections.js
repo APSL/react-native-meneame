@@ -2,7 +2,8 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { NavigatorWrapper } from 'react-native-navigator-wrapper'
 
-import mnmRouteMapper from './MnmRouteMapper'
+
+import mnmRouteMapper, { AboutUsButton } from './MnmRouteMapper'
 import MnmNewsList from './MnmNewsList'
 
 export function MnmSectionPortada({openMenu}) {
@@ -12,6 +13,7 @@ export function MnmSectionPortada({openMenu}) {
         component: MnmNewsList,
         passProps: {url: 'https://www.meneame.net/api/list/'},
         title: 'Portada',
+        rightElement: <AboutUsButton />,
       }}
       navBarStyle={styles.navBarStyle}
       routeMapper={mnmRouteMapper(openMenu)}
@@ -26,6 +28,7 @@ export function MnmSectionNuevas({openMenu}) {
         component: MnmNewsList,
         passProps: {url: 'https://www.meneame.net/api/list/?status=queued'},
         title: 'Nuevas',
+        rightElement: <AboutUsButton />,
       }}
       navBarStyle={styles.navBarStyle}
       routeMapper={mnmRouteMapper(openMenu)}
@@ -40,6 +43,7 @@ export function MnmSectionPopulares({openMenu}) {
         component: MnmNewsList,
         passProps: {url: 'https://www.meneame.net/api/list/?popular'},
         title: 'Populares',
+        rightElement: <AboutUsButton />,
       }}
       navBarStyle={styles.navBarStyle}
       routeMapper={mnmRouteMapper(openMenu)}
@@ -54,6 +58,7 @@ export function MnmSectionMasVisitadas({openMenu}) {
         component: MnmNewsList,
         passProps: {url: 'https://www.meneame.net/api/list/?top_visited'},
         title: 'Más visitadas',
+        rightElement: <AboutUsButton />,
       }}
       navBarStyle={styles.navBarStyle}
       routeMapper={mnmRouteMapper(openMenu)}
@@ -68,6 +73,7 @@ export function MnmSectionDestacadas({openMenu}) {
         component: MnmNewsList,
         passProps: {url: 'https://www.meneame.net/api/list/?active'},
         title: 'Destacadas',
+        rightElement: <AboutUsButton />,
       }}
       navBarStyle={styles.navBarStyle}
       routeMapper={mnmRouteMapper(openMenu)}
