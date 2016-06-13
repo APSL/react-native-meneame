@@ -1,3 +1,3 @@
 # react-native-meneame
 
-A [meneame.net]() client for iOS built with React Native.
+A [meneame.net]() client for iOS and Android built with React Native.
