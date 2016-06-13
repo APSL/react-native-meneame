@@ -88,10 +88,11 @@ const navBarColor = '#d35400'
 
 const styles = StyleSheet.create({
   browserButtonContainer: {
-    flex: 1,
+    width: 50,
+    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 12,
+    justifyContent: 'center',
   },
   menuButtonContainer: {
     flex: 1,
