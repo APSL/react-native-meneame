@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import {
-    StyleSheet,
-    View,
-    ListView,
-    ActivityIndicatorIOS,
+  Platform,
+  StyleSheet,
+  View,
+  ListView,
+  ActivityIndicatorIOS,
+  ProgressBarAndroid,
 } from 'react-native'
 
 var MnmNewsRow = require('./MnmNewsRow');
@@ -71,39 +73,50 @@ class MnmPublicadas extends Component {
         />
       )
     } else {
+      if (Platform.OS === 'ios') {
+        return (
+          <ActivityIndicatorIOS
+            style={styles.centering}
+            animating={true}
+            color="#262626"
+            size="large" />
+        )
+      }
       return (
-        <ActivityIndicatorIOS
-          style={styles.centering}
-          animating={true}
-          color="#262626"
-          size="large" />
+          <View style={styles.centering}>
+            <ProgressBarAndroid style={styles.progressBar} color="#d35400"/>
+          </View>
       )
     }
   }
 
-    render() {
-      return (
-          <View style={styles.container}>
-              {this._renderList()}
-          </View>
-      );
-    }
+  render() {
+    return (
+        <View style={styles.container}>
+            {this._renderList()}
+        </View>
+    );
+  }
 }
 
 var styles = StyleSheet.create({
-    centering: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#FAFAFA',
-    },
-    list: {
-        flex: 1,
-        backgroundColor: '#FAFAFA',
-    }
+  progressBar: {
+    width: 50,
+    height: 50,
+  },
+  centering: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#FAFAFA',
+  },
+  list: {
+    flex: 1,
+    backgroundColor: '#FAFAFA',
+  }
 });
 
 module.exports = MnmPublicadas;
