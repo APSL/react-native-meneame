@@ -25,7 +25,7 @@ export const MenuButton = ({openMenu}) => {
 export const BrowserButton = ({url}) => {
   let icon
   if (Platform.OS === 'ios') {
-    icon = <FontAwesome name="safari" size={24} color={navBarColor} />
+    icon = <FontAwesome name="safari" size={22} color={navBarColor} style={styles.iosBrowserButton} />
   } else {
     icon = <FontAwesome name="chrome" size={24} color={navBarColor} />
   }
@@ -87,6 +87,9 @@ export default function mnmRouteMapper(openMenu) {
 const navBarColor = '#d35400'
 
 const styles = StyleSheet.create({
+  iosBrowserButton: {
+    paddingBottom: 1,
+  },
   browserButtonContainer: {
     width: 50,
     height: 50,
