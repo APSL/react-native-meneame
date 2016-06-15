@@ -22,11 +22,11 @@ class MnmAbout extends Component {
           </View>
         </TouchableHighlight>
         <TouchableHighlight
-          onPress={() => {Linking.openURL('http://publicsource.apple.com/license/apsl/')}}
+          onPress={() => {Linking.openURL('https://opensource.org/licenses/MIT/')}}
           underlayColor="#FFFFFF"
           style={styles.license}
         >
-          <Text style={styles.text}>Released under APSL license, 2015</Text>
+          <Text style={styles.text}>Released under MIT license, 2015</Text>
         </TouchableHighlight>
         <Text style={styles.text}>Thanks to meneame.net and the React Native community</Text>
       </View>
