@@ -1,0 +1,9 @@
+// Duplicate this file, rename it to "ThumborConfig.js" and change the constants.
+
+const THUMBOR_KEY = 'change_me'
+const THUMBOR_URL = 'https://change_me.com/'
+
+export {
+  THUMBOR_KEY,
+  THUMBOR_URL
+}
