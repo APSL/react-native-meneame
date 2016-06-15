@@ -6,17 +6,19 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "moment": "^2.10.3",
-    "react": "^0.14.3",
-    "react-native": "^0.14.2",
-    "react-native-button": ">=1.2.0",
-    "react-native-navbar": "^1.0.6",
-    "react-native-parallax-view": "^2.0.2",
-    "react-native-vector-icons": ">=0.8.5",
-    "react-redux": "^4.0.0",
-    "react-timer-mixin": "^0.13.2",
-    "redux": "^3.0.4",
-    "thumbor-url-builder": "git+https://github.com/APSL/ThumborUrlBuilder.git"
+    "moment": "^2.10.6",
+    "react": "^0.14.8",
+    "react-native": "^0.25.1",
+    "react-native-button": "^1.5.0",
+    "react-native-htmlview": "^0.5.0",
+    "react-native-navbar": "^1.4.2",
+    "react-native-navigator-wrapper": "^0.2.0",
+    "react-native-parallax-view": "^2.0.4",
+    "react-native-radio-buttons": "^0.11.0",
+    "react-native-section-menu": "github:apsl/react-native-section-menu",
+    "react-native-vector-icons": "^2.0.3",
+    "react-timer-mixin": "^0.13.3",
+    "thumbor-url-builder": "APSL/ThumborUrlBuilder"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.5",

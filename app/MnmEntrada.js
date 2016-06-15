@@ -1,27 +1,23 @@
-/*jshint esnext: true*/
-/*global require, module, fetch*/
-var React = require('react-native');
-var {
+import React, { Component } from 'react'
+import {
     StyleSheet,
-    PixelRatio,
     View,
     Text,
-    SegmentedControlIOS,
-    StatusBarIOS,
     Navigator,
-    TouchableHighlight,
-    Component
-} = React;
+    TouchableHighlight
+} from 'react-native'
+
 var screen = require('Dimensions').get('window');
 var Button = require('react-native-button');
 var ParallaxView = require('react-native-parallax-view');
 var ThumborURLBuilder = require('thumbor-url-builder');
-var NavigationBar = require('react-native-navbar');
 
-import { THUMBOR_KEY, THUMBOR_URL} from './ThumborConfig'
-var MnmCommentsContainer = require('./MnmCommentsContainer');
-var MnmEntradaInfo = require('./MnmEntradaInfo');
+import { THUMBOR_KEY, THUMBOR_URL } from './ThumborConfig'
+import MnmEntryTextAndDetails from './MnmEntryTextAndDetails'
+var MnmComments = require('./MnmComments');
 var MnmWebviewEntry = require('./MnmWebviewEntry');
+import { BrowserButton } from './MnmRouteMapper'
+
 
 class NavButton extends Component {
     render() {
@@ -47,51 +43,25 @@ class MnmEntrada extends Component {
         };
     }
 
-    _renderSegmented(entrada) {
-        if (this.state.value === 'Noticia') {
-            return <Text style={styles.story}>{entrada.content}</Text>;
-        } else {
-            return <MnmEntradaInfo entry={entrada}/>;
-        }
-    }
-
     _titlePressed() {
-        this.props.navigator.push({
-            title: this.props.entrada.title,
-            component: MnmWebviewEntry,
-            passProps: {url: this.props.entrada.go},
-            navigationBar:
-                <NavigationBar
-                    title={this.props.entrada.title.substring(0, 25) + '...'}
-                    buttonsColor='#d35400'
-                    prevTitle='Atrás'
-                    navigator={{}}
-                    route={{}}
-                />
-        });
-    }
-
-    _switchDetails(value) {
-        this.setState({
-            value: value
-        });
-    }
-
-    componentDidMount() {
-        StatusBarIOS.setHidden(true, true);
-    }
-
-    componentWillUnmount() {
-        StatusBarIOS.setHidden(false, true);
+      const URL = this.props.entrada.go
+      this.props.navigator.push({
+        title: this.props.entrada.from,
+        component: MnmWebviewEntry,
+        passProps: {uri: URL},
+        rightElement: <BrowserButton url={URL} />
+      });
     }
 
     render() {
-        var entrada = this.props.entrada;
+        const entrada = this.props.entrada
+        const backgroundSource = entrada.mediaHeader ? {uri: entrada.mediaHeader} : null
         return (
             <ParallaxView
-                backgroundSource={{uri: entrada.mediaHeader}}
+                backgroundSource={backgroundSource}
                 windowHeight={250}
-                style={{backgroundColor: '#FAFAFA'}}>
+                style={{backgroundColor: '#FAFAFA'}}
+                contentInset={{bottom: 49}}>
                 <View style={styles.container}>
                     <View style={styles.info}>
                         <TouchableHighlight
@@ -101,22 +71,16 @@ class MnmEntrada extends Component {
                         </TouchableHighlight>
                         <Text style={styles.from}>{entrada.from}</Text>
                     </View>
-                    <SegmentedControlIOS
-                        values={['Noticia', 'Detalles']}
-                        tintColor={'#d35400'}
-                        selectedIndex={0}
-                        style={styles.segmented}
-                        onValueChange={this._switchDetails.bind(this)}/>
-                    {this._renderSegmented(entrada)}
+                    <MnmEntryTextAndDetails entry={entrada} />
                     <NavButton onPress={() => {
                         this.props.navigator.push({
-                            index: 1,
-                            component: MnmCommentsContainer,
+                            title: 'Comentarios',
+                            component: MnmComments,
                             sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
                             passProps: {entryId: entrada.id}
                         });
                     }} text={'Comentarios (' + entrada.comments + ')'}
-                    style={styles.button}/>
+                       style={styles.button}/>
                 </View>
             </ParallaxView>
         );
@@ -124,32 +88,21 @@ class MnmEntrada extends Component {
 }
 
 var styles = StyleSheet.create({
-    header: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        shadowColor: '#222',
-        shadowOpacity: 0.9,
-        shadowRadius: 2,
-        backgroundColor: 'transparent',
-    },
-    headerTitle: {
-        alignItems: 'flex-end',
-        color: '#ecf0f1',
-        fontSize: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        marginBottom: 5,
-    },
     container: {
         flex: 1,
         backgroundColor: '#FAFAFA',
+    },
+    info: {
+      marginLeft: 20,
+      marginRight: 20,
+      marginTop: 10,
+      marginBottom: 10,
+      paddingBottom: 10,
     },
     title: {
         fontWeight: '300',
         color: '#262626',
         fontSize: 20,
-        paddingTop: 10,
-        paddingBottom: 10,
     },
     from: {
         fontWeight: '300',
@@ -157,36 +110,9 @@ var styles = StyleSheet.create({
         fontSize: 12,
         marginBottom: 5,
     },
-    info: {
-        borderBottomColor: '#7f8c8d',
-        borderBottomWidth: 1 / PixelRatio.get(),
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 10,
-        marginBottom: 10,
-        paddingBottom: 10,
-    },
-    meneos: {
-        fontWeight: '300',
-        color: '#d35400',
-        marginBottom: 5,
-    },
-    story: {
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        fontWeight: '300',
-        color: '#7f8c8d',
-        fontSize: 14,
-    },
-    segmented: {
-        marginTop: 10,
-        marginLeft: 20,
-        marginRight: 20,
-    },
     button: {
         color: '#d35400',
-        marginTop: 20,
+        marginTop: 10,
         fontSize: 22,
         paddingTop: 15,
         paddingBottom: 25,

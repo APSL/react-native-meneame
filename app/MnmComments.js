@@ -3,34 +3,35 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
+import React, { Component } from 'react'
+import {
     StyleSheet,
+    Platform,
     PixelRatio,
     View,
-    Image,
     Text,
-    TouchableHighlight,
     ActivityIndicatorIOS,
-    ListView,
-    WebView,
-    Component
-} = React;
+    ProgressBarAndroid,
+    ListView
+} from 'react-native'
+
+import HTMLView from 'react-native-htmlview'
 
 var moment = require('moment');
 var Icon = require('react-native-vector-icons/EvilIcons');
 
+
 class MnmComments extends Component {
     constructor(props) {
-        super(props);
-        var dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1.id !== r2.id
-        });
-        this.state = {
-            dataSource: dataSource.cloneWithRows([]),
-            rows: []
-        };
-        this._getComments();
+      super(props);
+      var dataSource = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1.id !== r2.id
+      });
+      this.state = {
+        dataSource: dataSource.cloneWithRows([]),
+        rows: []
+      };
+      this._getComments();
     }
 
     _getComments() {
@@ -58,49 +59,63 @@ class MnmComments extends Component {
     }
 
     renderRow(rowData) {
-        return (
-            <View style={styles.cellContainer}>
-                <View style={styles.infoContainer}>
-                    <Text style={styles.username}>{rowData.user}</Text>
-                    <Icon style={styles.icon} name='like' size={20}
-                        color='#95a5a6'/>
-                    <Text style={styles.votes}>{rowData.votes}</Text>
-                    <Icon style={styles.iconKarma} name='heart' size={20}
-                        color='#95a5a6'/>
-                    <Text style={styles.karma}>{rowData.karma}</Text>
-                    <Text style={styles.date}>{rowData.fromNow}</Text>
-                </View>
-                <View style={styles.textContainer}>
-                    <Text style={styles.commentNumber}>#{rowData.order}</Text>
-                    <Text style={styles.comment}>{rowData.content}</Text>
-                </View>
+      return (
+        <View style={styles.cellContainer}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.username}>{rowData.user}</Text>
+            <View style={styles.commentData}>
+              <Icon style={styles.icon} name="like" size={20} />
+              <Text style={styles.counter}>{rowData.votes}</Text>
+              <Icon style={styles.icon} name="heart" size={20} />
+              <Text style={styles.counter}>{rowData.karma}</Text>
+              <Text style={styles.date}>{rowData.fromNow}</Text>
             </View>
-        );
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.commentNumber}>#{rowData.order}</Text>
+            <Text style={styles.comment}>
+              <HTMLView value={rowData.content} stylesheet={htmlStyles} />
+            </Text>
+          </View>
+        </View>
+      );
     }
 
-    _renderList() {
-        if (this.state.rows.length > 0) {
-            return <ListView style={styles.navcomments}
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}
-                        automaticallyAdjustContentInsets={false}
-                    />;
-        } else {
-            return <ActivityIndicatorIOS
-                        animating={true}
-                        style={styles.centering}
-                        color='#262626'
-                    />;
-        }
-    }
-
-    render() {
+  _renderList() {
+    if (this.state.rows.length > 0) {
+      return (
+        <ListView style={styles.navcomments}
+          contentInset={{bottom: 49}}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)}
+          automaticallyAdjustContentInsets={false}
+        />
+      )
+    } else {
+      if (Platform.OS === 'ios') {
         return (
-            <View style={styles.container}>
-                {this._renderList()}
-            </View>
-        );
+          <ActivityIndicatorIOS
+            animating={true}
+            style={styles.centering}
+            color='#262626'
+          />
+        )
+      }
+      return (
+        <View style={styles.centering}>
+          <ProgressBarAndroid style={styles.progressBar} color="#d35400"/>
+        </View>
+      )
     }
+  }
+
+  render() {
+      return (
+          <View style={styles.container}>
+              {this._renderList()}
+          </View>
+      );
+  }
 }
 
 var styles = StyleSheet.create({
@@ -130,29 +145,28 @@ var styles = StyleSheet.create({
         marginBottom: 10,
     },
     username: {
-        flex: 5,
+        flex: 1,
+        flexDirection: 'row',
         fontWeight: 'bold',
         fontSize: 14,
         color: '#262626',
     },
+    commentData: {
+        flex: 2,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
     icon: {
-        bottom: 3,
-    },
-    iconKarma: {
-        bottom: 3,
-        marginLeft: 10,
-    },
-    votes: {
+        width: 20,
         color: '#95a5a6',
     },
-    karma: {
+    counter: {
         color: '#95a5a6',
+        marginRight: 10,
     },
     date: {
-        flex: 4,
         fontSize: 14,
         fontWeight: '300',
-        textAlign: 'right',
         color: '#95a5a6',
     },
     textContainer: {
@@ -176,6 +190,16 @@ var styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#FAFAFA',
     },
+    progressBar: {
+      width: 50,
+      height: 50,
+    },
 });
+
+const htmlStyles = StyleSheet.create({
+  b: {
+    fontWeight: '600',
+  }
+})
 
 module.exports = MnmComments;

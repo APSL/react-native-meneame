@@ -1,174 +1,113 @@
-import React, {
-  TabBarIOS,
-  Navigator,
-  TouchableHighlight,
-  StyleSheet,
-  Image,
-  View
-} from 'react-native'
-
-require('moment/locale/es')
+import React from 'react'
+import { StyleSheet, Image, Text, Dimensions } from 'react-native'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicon from 'react-native-vector-icons/Ionicons'
-import NavigationBar from 'react-native-navbar'
-import MnmPublicadas from './MnmPublicadas'
-import MnmAbout from './MnmAbout'
+import { Menu } from 'react-native-section-menu'
+
+import {
+  MnmSectionPortada,
+  MnmSectionNuevas,
+  MnmSectionPopulares,
+  MnmSectionMasVisitadas,
+  MnmSectionDestacadas,
+} from './MnmSections'
+
+
+const MnmAndroidHeader = (props) =>
+  <Image source={require('./img/header.png')} style={styles.headerContainer} resizeMode="cover">
+    <Text style={styles.headerText}>Menéame</Text>
+    <Text style={styles.versionText}>Versión 1.0</Text>
+  </Image>
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+    width: Dimensions.get('window').width - 56,
+    height: ((Dimensions.get('window').width - 56) * 9) / 16,
+    backgroundColor: 'coral',
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 24,
+    marginLeft: 14,
+    marginBottom: 4,
+  },
+  versionText : {
+    color: 'white',
+    fontSize: 14,
+    marginLeft: 14,
+    marginBottom: 8,
+  }
+})
+
 
 class Meneame extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      selectedTab: 'Portada'
-    }
-  }
-
-  _openAbout () {
-    this.navigator.push({
-      component: MnmAbout,
-      navigationBar:
-      <NavigationBar
-        title={'Acerca de'}
-        buttonsColor='#d35400'
-        prevTitle='Atrás'
-        navigator={{}}
-        route={{}}
-        />
-    })
-  }
-
-  _renderContentWithComponent (component) {
-    return (
-      <Navigator
-        style={styles.container}
-        initialRoute={{
-          component: component,
-          passProps: {section: this.state.selectedTab},
-          navigationBar:
-          <NavigationBar
-            title={this.state.selectedTab}
-            navigator={{}}
-            route={{}}
-            customPrev={
-              <TouchableHighlight
-                onPress={this._openAbout}
-                underlayColor='#FFFFFF'
-                style={styles.button}>
-                <Image source={{uri: 'settings'}} />
-              </TouchableHighlight>
-            }
-            />
-        }}
-        renderScene={(route, nav) => {
-          var props = route.passProps || {}
-          props.navigator = nav
-          var navBar = route.navigationBar
-          if (navBar) {
-            navBar = React.cloneElement(navBar, {
-              navigator: nav,
-              route: route
-            })
-          }
-          var element = React.createElement.bind(this)(
-            route.component, props
-          )
-          return (
-            <View style={{flex: 1}}>
-              {navBar}
-              {element}
-            </View>
-          )
-        }}
-        configureScene={(route) => {
-          if (route.sceneConfig) {
-            return route.sceneConfig
-          }
-          return Navigator.SceneConfigs.FloatFromRight
-        }}
-        />
-    )
-  }
-
   render () {
+    const androidIconSize = 18
+    const iOSiconSize = 30
+    let itemId = 0
+    const header = <MnmAndroidHeader />
+
     return (
-      <TabBarIOS barTintColor='black' tintColor='#d35400'>
-        <Ionicon.TabBarItem title='Portada'
-          iconName='ios-paper-outline'
-          selectedIconName='ios-paper'
-          selected={this.state.selectedTab === 'Portada'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'Portada'
-            })
-          }}>
-          {this._renderContentWithComponent(MnmPublicadas)}
-        </Ionicon.TabBarItem>
-        <Ionicon.TabBarItem title='Nuevas'
-          iconName='ios-time-outline'
-          selectedIconName='ios-time'
-          selected={this.state.selectedTab === 'Nuevas'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'Nuevas'
-            })
-          }}>
-          {this._renderContentWithComponent(MnmPublicadas)}
-        </Ionicon.TabBarItem>
-        <Ionicon.TabBarItem title='Populares'
-          iconName='ios-heart-outline'
-          selectedIconName='ios-heart'
-          selected={this.state.selectedTab === 'Populares'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'Populares'
-            })
-          }}>
-          {this._renderContentWithComponent(MnmPublicadas)}
-        </Ionicon.TabBarItem>
-        <Ionicon.TabBarItem title='Más visitadas'
-          iconName='ios-flame-outline'
-          selectedIconName='ios-flame'
-          selected={this.state.selectedTab === 'Más visitadas'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'Más visitadas'
-            })
-          }}>
-          {this._renderContentWithComponent(MnmPublicadas)}
-        </Ionicon.TabBarItem>
-        <Ionicon.TabBarItem title='Destacadas'
-          iconName='ios-star-outline'
-          selectedIconName='ios-star'
-          selected={this.state.selectedTab === 'Destacadas'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'Destacadas'
-            })
-          }}>
-          {this._renderContentWithComponent(MnmPublicadas)}
-        </Ionicon.TabBarItem>
-      </TabBarIOS>
+      <Menu barTintColor="black" tintColor="#d35400" initialEntry={0}
+        header={header}
+        entries={[
+          {
+            id: itemId++,
+            title: 'Portada',
+            element: <MnmSectionPortada />,
+            androidIcon: <MaterialIcons name="description" size={androidIconSize} />,
+            itemComponent: Ionicon.TabBarItem,
+            iconName: 'ios-paper-outline',
+            selectedIconName: 'ios-paper',
+            iconSize: iOSiconSize,
+          },
+          {
+            id: itemId++,
+            title: 'Nuevas',
+            element: <MnmSectionNuevas />,
+            androidIcon: <MaterialIcons name="access-time" size={androidIconSize} />,
+            itemComponent: Ionicon.TabBarItem,
+            iconName: 'ios-time-outline',
+            selectedIconName: 'ios-time',
+            iconSize: iOSiconSize,
+          },
+          {
+            id: itemId++,
+            title: 'Populares',
+            element: <MnmSectionPopulares />,
+            androidIcon: <MaterialIcons name="favorite" size={androidIconSize} />,
+            itemComponent: Ionicon.TabBarItem,
+            iconName: 'ios-heart-outline',
+            selectedIconName: 'ios-heart',
+            iconSize: iOSiconSize,
+          },
+          {
+            id: itemId++,
+            title: 'Más visitadas',
+            element: <MnmSectionMasVisitadas />,
+            androidIcon: <MaterialIcons name="whatshot" size={androidIconSize} />,
+            itemComponent: Ionicon.TabBarItem,
+            iconName: 'ios-flame-outline',
+            selectedIconName: 'ios-flame',
+            iconSize: iOSiconSize,
+          },
+          {
+            id: itemId++,
+            title: 'Destacadas',
+            element: <MnmSectionDestacadas />,
+            androidIcon: <MaterialIcons name="grade" size={androidIconSize} />,
+            itemComponent: Ionicon.TabBarItem,
+            iconName: 'ios-star-outline',
+            selectedIconName: 'ios-star',
+            iconSize: iOSiconSize,
+          },
+        ]}
+      />
     )
   }
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  navBar: {
-    backgroundColor: '#FAFAFA',
-  },
-  button: {
-    paddingLeft: 5,
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 40,
-  },
-  text: {
-    color: '#d35400',
-    alignSelf: 'center',
-  },
-})
 
 export default Meneame

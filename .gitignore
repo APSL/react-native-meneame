@@ -21,16 +21,22 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-iOS/main.jsbundle
 
 # Android/IJ
 #
 .idea
 .gradle
 local.properties
+*.keystore
 
 # node.js
 #
 node_modules/
 npm-debug.log
 ThumborConfig.js
+
+# BUCK
+buck-out/
+\.buckd/
+android/app/libs
+android/keystores/debug.keystore

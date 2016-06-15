@@ -3,43 +3,38 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
+import React, { PropTypes } from 'react'
+import {
     StyleSheet,
     View,
-    StatusBarIOS,
-    WebView,
-    Component
-} = React;
+    WebView
+} from 'react-native'
 
-class MnmWebviewEntry extends Component {
-    componentDidMount() {
-        StatusBarIOS.setHidden(false, true);
-    }
+class MnmWebviewEntry extends React.Component {
+  static propTypes = {
+    uri: PropTypes.string.isRequired
+  };
 
-    componentWillUnmount() {
-        StatusBarIOS.setHidden(true, true);
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <WebView
-                    url={this.props.url}
-                    automaticallyAdjustContentInsets={false}
-                />
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <WebView
+          scalesPageToFit={true}
+          source={{uri: this.props.uri}}
+          automaticallyAdjustContentInsets={false}
+        />
+      </View>
+    )
+  }
 }
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    webView: {
-        flex: 1,
-    },
-});
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+  },
+  webView: {
+      flex: 1,
+  },
+})
 
 module.exports = MnmWebviewEntry;
