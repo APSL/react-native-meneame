@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+/* @flow */
+
+import React from 'react'
 import {
-    StyleSheet,
-    View,
-    PixelRatio,
-    Image,
-    Text,
-    TouchableHighlight,
+  StyleSheet,
+  View,
+  PixelRatio,
+  Image,
+  Text,
+  TouchableHighlight,
 } from 'react-native'
 
 var EvilIcons = require('react-native-vector-icons/EvilIcons');
@@ -15,36 +17,38 @@ var MnmEntrada = require('./MnmEntrada');
 import { BrowserButton } from './MnmRouteMapper'
 
 
-class MnmEntryDate extends Component {
-    render() {
-        var dateText = 'Publicada';
-        if (this.props.section === 'Nuevas') {
-            dateText = 'Enviada';
-        }
-        return (
-            <Text style={styles.pubDate}>{dateText} {this.props.date}</Text>
-        );
+class MnmEntryDate extends React.Component {
+  render() {
+    let dateText = 'Publicada'
+    if (this.props.section === 'Nuevas') {
+      dateText = 'Enviada'
     }
+    return (
+      <Text style={styles.pubDate}>
+        {dateText} {this.props.date}
+      </Text>
+    )
+  }
 }
 
-class MnmPublicadasRow extends Component {
+class MnmPublicadasRow extends React.Component {
   renderImage(entry) {
-      if (entry.mediaPublished) {
-          return (
-              <View style={styles.imgContainer}>
-                  <Image source={{uri: entry.mediaPublished}} style={styles.image}/>
-              </View>
-          );
-      }
+    if (entry.mediaPublished) {
+      return (
+        <View style={styles.imgContainer}>
+          <Image source={{uri: entry.mediaPublished}} style={styles.image}/>
+        </View>
+      );
+    }
   }
 
   rowPressed(entry) {
-      this.props.navigator.push({
-          title: 'Noticia',
-          component: MnmEntrada,
-          passProps: {entrada: entry},
-          rightElement: <BrowserButton url={entry.go} />,
-      });
+    this.props.navigator.push({
+      title: 'Noticia',
+      component: MnmEntrada,
+      passProps: {entrada: entry},
+      rightElement: <BrowserButton url={entry.go} />,
+    });
   }
 
   render() {
@@ -67,7 +71,9 @@ class MnmPublicadasRow extends Component {
           </View>
           {this.renderImage(this.props.entry)}
           <View style={styles.titleContent}>
-            <Text style={styles.title}>{this.props.entry.title}</Text>
+            <Text style={styles.title}>
+              {this.props.entry.title}
+            </Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -88,12 +94,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1 / PixelRatio.get(),
   },
   infoContainer: {
-    flex: 1,
+    height: 46,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginTop: 10,
-    marginBottom: 10,
+    padding: 20,
   },
   meneos: {
     color: '#d35400',
@@ -131,7 +136,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   imgContainer: {
-    flex: 1,
     height: 155,
     width: screen.width - 20,
     marginBottom: 10,
@@ -155,7 +159,7 @@ const styles = StyleSheet.create({
     color: '#262626',
     fontWeight: '300',
     fontSize: 20,
-    marginTop: 5,
+    padding: 5,
   },
 });
 
