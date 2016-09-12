@@ -10,11 +10,11 @@ import {
 import Button from 'react-native-button'
 import ParallaxView from 'react-native-parallax-view'
 import ThumborURLBuilder from 'thumbor-url-builder'
-import { THUMBOR_KEY, THUMBOR_URL } from './ThumborConfig'
-import MnmEntryTextAndDetails from './MnmEntryTextAndDetails'
-import MnmComments from './MnmComments'
-import MnmWebviewEntry from './MnmWebviewEntry'
-import { BrowserButton } from './MnmRouteMapper'
+import { THUMBOR_KEY, THUMBOR_URL } from '../../ThumborConfig'
+import MnmEntryTextAndDetails from '../../NewsDetail/Components/MnmEntryTextAndDetails'
+import MnmComments from '../../MnmComments'
+import MnmWebviewEntry from '../../MnmWebviewEntry'
+import { BrowserButton } from '../../MnmRouteMapper'
 
 const screen = Dimensions.get('window')
 
@@ -28,7 +28,7 @@ class NavButton extends React.Component {
   }
 }
 
-class MnmEntrada extends React.Component {
+class NewsDetail extends React.Component {
   constructor(props) {
     super(props);
     const thumborURL = new ThumborURLBuilder(THUMBOR_KEY, THUMBOR_URL);
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   },
 })
 
-module.exports = MnmEntrada
+module.exports = NewsDetail

@@ -8,7 +8,7 @@ import {
   PixelRatio,
   View,
   Text,
-  ActivityIndicatorIOS,
+  ActivityIndicator,
   ProgressBarAndroid,
   ListView,
   RefreshControl,
@@ -109,7 +109,7 @@ class MnmComments extends React.Component {
     } else {
       if (Platform.OS === 'ios') {
         return (
-          <ActivityIndicatorIOS
+          <ActivityIndicator
             animating={true}
             style={styles.centering}
             color='#262626'

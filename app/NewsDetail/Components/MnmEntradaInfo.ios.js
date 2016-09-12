@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+/* @flow */
 
+import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 
-class MnmEntradaInfo extends Component {
-
-  render() {
-    const e = this.props.entry;
+class MnmEntradaInfo extends React.Component {
+  render () {
+    const e = this.props.entry
     return (
       <View style={styles.container}>
         <View style={styles.leftContainer}>

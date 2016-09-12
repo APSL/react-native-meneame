@@ -1,16 +1,16 @@
+/* @flow */
+
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { NavigatorWrapper } from 'react-native-navigator-wrapper'
-
-
 import mnmRouteMapper, { AboutUsButton } from './MnmRouteMapper'
-import MnmNewsList from './MnmNewsList'
+import NewsList from './NewsList/Components/NewsList'
 
 export function MnmSectionPortada({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
-        component: MnmNewsList,
+        component: NewsList,
         passProps: {url: 'https://www.meneame.net/api/list/'},
         title: 'Portada',
         rightElement: <AboutUsButton />,
@@ -25,7 +25,7 @@ export function MnmSectionNuevas({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
-        component: MnmNewsList,
+        component: NewsList,
         passProps: {url: 'https://www.meneame.net/api/list/?status=queued'},
         title: 'Nuevas',
         rightElement: <AboutUsButton />,
@@ -40,10 +40,10 @@ export function MnmSectionPopulares({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
-        component: MnmNewsList,
+        component: NewsList,
         passProps: {url: 'https://www.meneame.net/api/list/?popular'},
         title: 'Populares',
-        rightElement: <AboutUsButton />,
+          rightElement: <AboutUsButton />,
       }}
       navBarStyle={styles.navBarStyle}
       routeMapper={mnmRouteMapper(openMenu)}
@@ -55,7 +55,7 @@ export function MnmSectionMasVisitadas({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
-        component: MnmNewsList,
+        component: NewsList,
         passProps: {url: 'https://www.meneame.net/api/list/?top_visited'},
         title: 'Más visitadas',
         rightElement: <AboutUsButton />,
@@ -70,7 +70,7 @@ export function MnmSectionDestacadas({openMenu}) {
   return (
     <NavigatorWrapper
       initialRoute={{
-        component: MnmNewsList,
+        component: NewsList,
         passProps: {url: 'https://www.meneame.net/api/list/?active'},
         title: 'Destacadas',
         rightElement: <AboutUsButton />,
@@ -82,5 +82,7 @@ export function MnmSectionDestacadas({openMenu}) {
 }
 
 const styles = StyleSheet.create({
-  navBarStyle: {backgroundColor: '#FAFAFA'}
+  navBarStyle: {
+    backgroundColor: '#FAFAFA'
+  }
 })

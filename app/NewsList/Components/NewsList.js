@@ -1,27 +1,33 @@
+/* @flow */
+
 import React from 'react'
 import {
   Platform,
   StyleSheet,
   View,
   ListView,
-  ActivityIndicatorIOS,
+  ActivityIndicator,
   ProgressBarAndroid,
   InteractionManager,
   RefreshControl,
   Dimensions
 } from 'react-native'
-import MnmNewsRow from './MnmNewsRow'
+import NewsDetail from '../../NewsDetail/Components/NewsDetail'
+import { BrowserButton } from '../../MnmRouteMapper'
+import NewsRow from './NewsRow'
 import ThumborURLBuilder from 'thumbor-url-builder'
-import { THUMBOR_KEY, THUMBOR_URL} from './ThumborConfig'
+import { THUMBOR_KEY, THUMBOR_URL} from '../../ThumborConfig'
 
 const screen = Dimensions.get('window')
 
-var moment = require('moment')
+const moment = require('moment')
 require('moment/locale/es')
 moment.locale('es')
 
 class MnmPublicadas extends React.Component {
   getPublicadas: Function;
+  renderRow: Function;
+  onNewsPress: Function;
 
   constructor(props) {
     super(props)
@@ -34,6 +40,8 @@ class MnmPublicadas extends React.Component {
       isFetching: false,
     }
     this.getPublicadas = this._getPublicadas.bind(this)
+    this.renderRow = this._renderRow.bind(this)
+    this.onNewsPress = this._onNewsPress.bind(this)
   }
 
   componentDidMount () {
@@ -65,19 +73,34 @@ class MnmPublicadas extends React.Component {
     })
   }
 
-  renderRow (rowData, sectionID, rowID, highlightRow) {
+  _onNewsPress (entry: Object) {
+    this.props.navigator.push({
+      title: 'Noticia',
+      component: NewsDetail,
+      passProps: {entrada: entry},
+      rightElement: <BrowserButton url={entry.go} />,
+    })
+  }
+
+  _renderRow (rowData, sectionID, rowID, highlightRow) {
     return (
-      <MnmNewsRow key={`news${rowID}`} entry={rowData} navigator={this.props.navigator} />
+      <NewsRow
+        key={`news${rowID}`}
+        entry={rowData}
+        onNewsPress={this.onNewsPress}
+      />
     )
   }
 
   _renderList() {
     if (this.state.published.length > 0) {
       return (
-        <ListView style={styles.list}
-          initialListSize={5}
+        <ListView
+          style={styles.list}
+          initialListSize={4}
+          pageSize={4}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)}
+          renderRow={this.renderRow}
           automaticallyAdjustContentInsets={false}
           refreshControl={
             <RefreshControl
@@ -90,11 +113,11 @@ class MnmPublicadas extends React.Component {
     } else {
       if (Platform.OS === 'ios') {
         return (
-          <ActivityIndicatorIOS
+          <ActivityIndicator
             style={styles.centering}
             animating={true}
-            color="#262626"
-            size="large"
+            color='#262626'
+            size='large'
           />
         )
       }

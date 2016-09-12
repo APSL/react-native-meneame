@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+/* @flow */
+
+import React from 'react'
 import {
   StyleSheet,
   PixelRatio,
@@ -8,11 +10,9 @@ import {
 } from 'react-native'
 
 import HTMLView from 'react-native-htmlview'
-
 var MnmEntradaInfo = require('./MnmEntradaInfo')
 
-
-export default class MnmEntryTextAndDetails extends Component {
+export default class MnmEntryTextAndDetails extends React.Component {
   constructor(props) {
     super(props)
     this.state = {value: 'Noticia'}

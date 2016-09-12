@@ -1,9 +1,10 @@
+/* @flow */
+
 import React from 'react'
 import { StyleSheet, Image, Text, Dimensions } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import { Menu } from 'react-native-section-menu'
-
 import {
   MnmSectionPortada,
   MnmSectionNuevas,
@@ -13,11 +14,15 @@ import {
 } from './MnmSections'
 
 
-const MnmAndroidHeader = (props) =>
-  <Image source={require('./img/header.png')} style={styles.headerContainer} resizeMode="cover">
+const MnmAndroidHeader = (props) => (
+  <Image
+    source={require('./img/header.png')}
+    style={styles.headerContainer}
+    resizeMode='cover'>
     <Text style={styles.headerText}>Menéame</Text>
     <Text style={styles.versionText}>Versión 1.0</Text>
   </Image>
+)
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -42,23 +47,24 @@ const styles = StyleSheet.create({
   }
 })
 
+const androidIconSize = 18
+const iOSiconSize = 30
 
 class Meneame extends React.Component {
   render () {
-    const androidIconSize = 18
-    const iOSiconSize = 30
     let itemId = 0
-    const header = <MnmAndroidHeader />
-
     return (
-      <Menu barTintColor="black" tintColor="#d35400" initialEntry={0}
-        header={header}
+      <Menu
+        barTintColor='black'
+        tintColor='#d35400'
+        initialEntry={0}
+        header={<MnmAndroidHeader />}
         entries={[
           {
             id: itemId++,
             title: 'Portada',
-            element: <MnmSectionPortada />,
-            androidIcon: <MaterialIcons name="description" size={androidIconSize} />,
+              element: <MnmSectionPortada />,
+            androidIcon: <MaterialIcons name='description' size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-paper-outline',
             selectedIconName: 'ios-paper',
@@ -68,7 +74,7 @@ class Meneame extends React.Component {
             id: itemId++,
             title: 'Nuevas',
             element: <MnmSectionNuevas />,
-            androidIcon: <MaterialIcons name="access-time" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name='access-time' size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-time-outline',
             selectedIconName: 'ios-time',
@@ -78,7 +84,7 @@ class Meneame extends React.Component {
             id: itemId++,
             title: 'Populares',
             element: <MnmSectionPopulares />,
-            androidIcon: <MaterialIcons name="favorite" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name='favorite' size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-heart-outline',
             selectedIconName: 'ios-heart',
@@ -88,7 +94,7 @@ class Meneame extends React.Component {
             id: itemId++,
             title: 'Más visitadas',
             element: <MnmSectionMasVisitadas />,
-            androidIcon: <MaterialIcons name="whatshot" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name='whatshot' size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-flame-outline',
             selectedIconName: 'ios-flame',
@@ -98,7 +104,7 @@ class Meneame extends React.Component {
             id: itemId++,
             title: 'Destacadas',
             element: <MnmSectionDestacadas />,
-            androidIcon: <MaterialIcons name="grade" size={androidIconSize} />,
+            androidIcon: <MaterialIcons name='grade' size={androidIconSize} />,
             itemComponent: Ionicon.TabBarItem,
             iconName: 'ios-star-outline',
             selectedIconName: 'ios-star',
