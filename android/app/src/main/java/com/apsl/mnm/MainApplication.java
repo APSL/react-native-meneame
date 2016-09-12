@@ -1,4 +1,4 @@
-package com.mnm;
+package com.apsl.mnm;
 
 import android.app.Application;
 import android.util.Log;
