@@ -1,0 +1,89 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Menéame noticias</title>
+        <style type="text/css">
+            .overflow {overflow:hidden;}
+            .pull-left {float:left;}
+            .pull-right {float:right; text-align:right;}
+            #wrapperPage {
+                width:100%;
+                max-width:900px;
+                margin:20px auto;
+                color:#666;
+                font-size:15px;
+                font-family: Verdana, Geneva, sans-serif;
+            }
+            #wrapperPage .logoContainer {
+                text-align:center;
+            }
+            #wrapperPage .textContainer {
+                padding:40px 0;
+                text-align:justify;
+            }
+            #wrapperPage .textContainer h1 {
+                font-weight:normal;
+                font-size:22px;
+                color:#000;
+            }
+            #wrapperPage .textContainer a {
+                text-decoration:underline;
+                color:#FF5400;
+            }
+            #wrapperPage ul {
+                list-style-type:none;
+                margin:20px 0;
+                padding:20px 0;
+                border-top:1px solid #efefef;
+                border-bottom:1px solid #efefef;
+            }
+            #wrapperPage footer {text-align:center;}
+            @media (max-width: 930px) {
+                #wrapperPage {
+                    width:94%;
+                    padding:0 3%;
+                }
+                #wrapperPage ul li {width:45%;}
+                #wrapperPage ul li a img {
+                    max-width:100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapperPage">
+
+            <header class="logoContainer">
+                <a href="index.html"><img src="img/meneame.png" alt="Menéame noticias" /></a>
+            </header>
+
+            <div class="textContainer">
+                <h1>Menéame noticias</h1>
+                <p>
+                    Con Menéame noticias podrás leer las noticias de las principales categorías como la portada o las que están en cola, acceder a todos los comentarios y por supuesto ver los detalles y navegar a la noticia desde la app.
+                </p>
+                <p>
+                    El código fuente de la aplicación está disponible en <a href="https://github.com/APSL/react-native-meneame">GitHub</a>.
+                </p>
+                <p>
+                    <a href="privacy.html">Política de privacidad</a>
+                </p>
+            </div>
+
+            <ul class="overflow">
+                <li class="pull-left"><a href="https://play.google.com/store/apps/details?id=com.apsl.mnm"><img src="img/google-play.png" alt="Disponible en Play Store" /></a></li>
+                <li class="pull-right"><a href="https://itunes.apple.com/es/app/meneame-noticias/id1005081426"><img src="img/app-store.png" alt="Disponible en App Store" /></a></li>
+            </ul>
+
+            <footer>
+                <a href="https://apsl.net/"><img src="img/apsl.gif" alt="APSL" /></a>
+                <p>
+                    Made with <big>♥</big> by APSL
+                </p>
+            </footer>
+
+        </div>
+
+    </body>
+</html>
